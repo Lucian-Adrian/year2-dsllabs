@@ -1,13 +1,14 @@
 {
-    VN={S, B, D},
-    VT={a, b, c},
-    P={
-    S → aB
-    B → aD
-    B → bB
-    D → aD
-    D → bS
-    B → cS
-    D → c
-}
+  "non_terminals": ["S", "B", "D"],
+  "terminals": ["a", "b", "c"],
+  "start": "S",
+  "rules": [
+    {"from": "S", "to": "aB"},
+    {"from": "B", "to": "aD"},
+    {"from": "B", "to": "bB"},
+    {"from": "D", "to": "aD"},
+    {"from": "D", "to": "bS"},
+    {"from": "B", "to": "cS"},
+    {"from": "D", "to": "c"}
+  ]
 }
