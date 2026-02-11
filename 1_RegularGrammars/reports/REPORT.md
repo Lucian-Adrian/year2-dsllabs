@@ -126,3 +126,4 @@ This implementation achieves a high-performance Regular Grammar to Finite Automa
 - NetworkX Documentation: https://networkx.org/
 - Matplotlib Documentation: https://matplotlib.org/
 - Pytest Framework: https://pytest.org/
+- Source code (GitHub): https://github.com/Lucian-Adrian/year2-dsllabs/tree/master/1_RegularGrammars
