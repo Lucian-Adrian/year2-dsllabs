@@ -2,7 +2,7 @@
 
 ## Subtitle: Implementation of a Regular Grammar to Finite Automaton Conversion Pipeline
 
-**Author:** [Your Name] | **Variant:** 13
+**Author:** Gavril Lucian-Adrian | **Variant:** 13
 
 ## 1. Objectives
 
