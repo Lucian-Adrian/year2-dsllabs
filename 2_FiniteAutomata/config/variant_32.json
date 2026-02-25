@@ -1,0 +1,15 @@
+{
+  "variant": 32,
+  "states": ["q0", "q1", "q2"],
+  "alphabet": ["a", "b", "c"],
+  "start": "q0",
+  "accepting": ["q2"],
+  "transitions": [
+    {"from": "q0", "on": "a", "to": "q0"},
+    {"from": "q0", "on": "a", "to": "q1"},
+    {"from": "q1", "on": "c", "to": "q0"},
+    {"from": "q1", "on": "b", "to": "q1"},
+    {"from": "q1", "on": "a", "to": "q2"},
+    {"from": "q2", "on": "a", "to": "q2"}
+  ]
+}

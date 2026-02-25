@@ -33,7 +33,9 @@ def main():
     if args.validate:
         accepted, path = automaton.check_with_path(args.validate)
         print(f"String '{args.validate}' -> {'Accepted' if accepted else 'Rejected'}")
-        print(f"Path: {path}")
+        # Convert Omega symbol to ASCII-safe representation for Windows console
+        path_str = [p.replace("Ω", "FINAL") for p in path]
+        print(f"Path: {path_str}")
 
     if args.visualize:
         plot_automaton(automaton, title="Finite Automaton")
