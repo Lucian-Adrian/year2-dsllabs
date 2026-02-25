@@ -31,13 +31,29 @@ if TYPE_CHECKING:
 # ---------------------------------------------------------------------------
 
 def _new_net(height: str = "500px", physics: bool = True) -> Network:
-    net = Network(
-        height=height,
-        width="100%",
-        directed=True,
-        bgcolor="#1e1e2e",
-        font_color="white",
-    )
+    # cdn_resources="in_line" embeds vis.js directly in the HTML blob.
+    # This avoids (a) CDN permission-policy warnings in Streamlit iframes and
+    # (b) the "Unexpected identifier 'Streamlit'" SyntaxError that appears when
+    # Streamlit's component host tries to inject utils.js into an iframe that
+    # is also loading remote scripts with conflicting scoping.
+    try:
+        net = Network(
+            height=height,
+            width="100%",
+            directed=True,
+            bgcolor="#0a0a0a",
+            font_color="#ededed",
+            cdn_resources="in_line",
+        )
+    except TypeError:
+        # Older pyvis versions don't have cdn_resources
+        net = Network(
+            height=height,
+            width="100%",
+            directed=True,
+            bgcolor="#0a0a0a",
+            font_color="#ededed",
+        )
     if physics:
         net.force_atlas_2based(
             gravity=-50,
@@ -59,44 +75,49 @@ def _node_style(
 ) -> Dict:
     """Return PyVis node kwargs."""
     if is_dead:
-        color = {"border": "#555", "background": "#333", "highlight": {"background": "#444"}}
+        color = {"border": "#333", "background": "#1a1a1a", "highlight": {"background": "#222"}}
         shape = "dot"
     elif is_active:
-        color = {"border": "#ffd700", "background": "#ffd700", "highlight": {"background": "#ffe566"}}
+        color = {"border": "#ffffff", "background": "#ffffff", "highlight": {"background": "#ededed"}}
         shape = "ellipse"
     elif is_conflict:
-        color = {"border": "#ff4500", "background": "#ff6b35", "highlight": {"background": "#ff8c66"}}
+        color = {"border": "#dc2626", "background": "#450a0a", "highlight": {"background": "#7f1d1d"}}
         shape = "ellipse"
     elif is_accepting and is_start:
-        color = {"border": "#32cd32", "background": "#003300", "highlight": {"background": "#006600"}}
+        color = {"border": "#16a34a", "background": "#052e16", "highlight": {"background": "#14532d"}}
         shape = "ellipse"
     elif is_accepting:
-        color = {"border": "#32cd32", "background": "#003300", "highlight": {"background": "#006600"}}
+        color = {"border": "#16a34a", "background": "#052e16", "highlight": {"background": "#14532d"}}
         shape = "ellipse"
     elif is_start:
-        color = {"border": "#00bfff", "background": "#003366", "highlight": {"background": "#005599"}}
+        color = {"border": "#2563eb", "background": "#03173a", "highlight": {"background": "#1e3a6e"}}
         shape = "ellipse"
     else:
-        color = {"border": "#aaa", "background": "#2d2d44", "highlight": {"background": "#3d3d60"}}
+        color = {"border": "#404040", "background": "#1a1a1a", "highlight": {"background": "#262626"}}
         shape = "ellipse"
 
-    border_width = 3 if (is_start or is_accepting) else 1
+    border_width = 2 if (is_start or is_accepting) else 1
+    font_color = "#000000" if is_active else "#ededed"
     return {
         "color": color,
         "shape": shape,
-        "size": 30,
-        "font": {"size": 16, "color": "white"},
+        "size": 28,
+        "font": {"size": 14, "color": font_color},
         "borderWidth": border_width,
-        "borderWidthSelected": 4,
+        "borderWidthSelected": 3,
     }
 
 
 def _merge_edge_labels(transitions: dict) -> Dict:
-    """Merge multiple (A,B,label) into a single edge with combined label."""
+    """Merge multiple transitions into single edges with combined label.
+    Handles both NDFA (frozenset targets) and DFA (string targets)."""
     edge_map: Dict = {}
     for (src, sym), tgt in transitions.items():
-        key = (src, tgt)
-        edge_map.setdefault(key, []).append(sym)
+        # NDFA: tgt is frozenset; DFA: tgt is a string
+        targets = tgt if isinstance(tgt, (frozenset, set)) else {tgt}
+        for t in targets:
+            key = (src, t)
+            edge_map.setdefault(key, []).append(sym)
     return {k: ",".join(sorted(v)) for k, v in edge_map.items()}
 
 
@@ -132,8 +153,8 @@ def ndfa_to_html(
     for (src, tgt), lbl in merged.items():
         net.add_edge(
             src, tgt, label=lbl,
-            color="#aaaaaa", width=2,
-            font={"size": 14, "color": "white"},
+            color="#555555", width=1,
+            font={"size": 12, "color": "#999999"},
             arrows="to",
         )
 
@@ -167,22 +188,22 @@ def dfa_to_html(
         # Add faint tint for visited-but-not-current states in trace
         if trace_path and s in trace_set and s != active_state:
             kwargs["color"] = {
-                "border": "#ffa500",
-                "background": "#3d2a00",
-                "highlight": {"background": "#5a3e00"},
+                "border": "#2563eb",
+                "background": "#0c1a3a",
+                "highlight": {"background": "#1e3a6e"},
             }
         net.add_node(s, label=s, **kwargs)
 
     merged = _merge_edge_labels(dfa.transitions)
     for (src, tgt), lbl in merged.items():
         if tgt == dfa.DEAD_LABEL and active_state is None:
-            edge_color = "#444444"
+            edge_color = "#2a2a2a"
         else:
-            edge_color = "#aaaaaa"
+            edge_color = "#555555"
         net.add_edge(
             src, tgt, label=lbl,
-            color=edge_color, width=2,
-            font={"size": 14, "color": "white"},
+            color=edge_color, width=1,
+            font={"size": 12, "color": "#999999"},
             arrows="to",
         )
 
