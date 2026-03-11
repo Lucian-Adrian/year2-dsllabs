@@ -1,0 +1,17 @@
+digraph Architecture {
+	fontsize=12 rankdir=LR
+	A [label="TensorScript Source"]
+	B [label="src/lexer.py"]
+	C [label="src/tokens.py"]
+	D [label=LexicalError]
+	E [label="CLI Output"]
+	F [label="Streamlit Observatory"]
+	G [label="src/highlighter.py"]
+	A -> B
+	B -> C
+	B -> D
+	C -> E
+	C -> F
+	C -> G
+	G -> E [style=dashed]
+}

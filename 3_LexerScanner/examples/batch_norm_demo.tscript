@@ -1,0 +1,4 @@
+// Batch normalization inspired parameter block
+let gamma = [1.0, 0.98, 1.02];
+let beta = [0.0, -0.01, 0.03];
+let normalized = [sigmoid(0.4), exp(0.1), log(1.5)];

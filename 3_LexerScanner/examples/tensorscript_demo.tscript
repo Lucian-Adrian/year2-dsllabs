@@ -1,0 +1,4 @@
+// Define a neural network layer
+let weights = [[0.5, -0.1], [sin(0.2), relu(0.9)]];
+let bias = [1.0, 0.0];
+let output = softmax([1, 2, 3]);

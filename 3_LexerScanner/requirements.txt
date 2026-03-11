@@ -1,0 +1,8 @@
+rich
+pytest
+streamlit
+altair
+pandas
+plotly
+graphviz
+streamlit-ace

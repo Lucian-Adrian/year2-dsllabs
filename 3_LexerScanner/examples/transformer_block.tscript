@@ -1,0 +1,4 @@
+// Transformer projection snapshot
+let query = [[0.12, 0.44], [cos(0.3), tan(0.1)]];
+let key = [[0.20, -0.17], [relu(0.6), sigmoid(0.2)]];
+let score = softmax([1, 3, 2]);
