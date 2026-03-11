@@ -7,12 +7,12 @@
 
 **One sentence:** A taxonomy of four grammar classes, each strictly more powerful than the last.
 
-| Type | Name | Production Rule Shape | Machine Equivalent |
-|---|---|---|---|
-| 0 | Unrestricted | αAβ → γ (anything) | Turing Machine |
-| 1 | Context-Sensitive | αAβ → αγβ, \|LHS\| ≤ \|RHS\| | Linear Bounded Automaton |
-| 2 | Context-Free | A → γ (single NT on LHS) | Pushdown Automaton |
-| **3** | **Regular** | **A → aB or A → a** | **Finite Automaton** |
+| Type  | Name              | Production Rule Shape        | Machine Equivalent       |
+| ----- | ----------------- | ---------------------------- | ------------------------ |
+| 0     | Unrestricted      | αAβ → γ (anything)           | Turing Machine           |
+| 1     | Context-Sensitive | αAβ → αγβ, \|LHS\| ≤ \|RHS\| | Linear Bounded Automaton |
+| 2     | Context-Free      | A → γ (single NT on LHS)     | Pushdown Automaton       |
+| **3** | **Regular**       | **A → aB or A → a**          | **Finite Automaton**     |
 
 **Why Type 3 is special:**
 - Every rule has a single terminal up front and at most one non-terminal at the tail (right-linear).
@@ -20,19 +20,15 @@
 - This means you can compile it into a lookup table. O(1) per character.
 - **Variant 13 is Type 3.** The linter confirms this algebraically before any other step runs.
 
-**The check in code:**
+**The check in code (src/grammar.py):**
 
 ```python
-# grammar.py
-is_type3 = all(
-    len(lhs) == 1 and lhs.isupper()       # single non-terminal
-    and (
-        re.match(r'^[a-z]$', rhs) or       # A → a
-        re.match(r'^[a-z][A-Z]$', rhs) or  # A → aB (right-linear)
-        rhs == ""                           # A → ε (terminator)
-    )
-    for lhs, rhs in productions
-)
+def classify(self) -> int:
+    """Returns the Chomsky type (0-3) of the grammar."""
+    if not self.is_context_sensitive(): return 0
+    if not self.is_context_free(): return 1
+    if not self.is_regular(): return 2
+    return 3
 ```
 
 ---
@@ -152,10 +148,10 @@ L(M₁₃) = a* b a* b
 
 **Strings confirmed:**
 
-| Input | Path | Result |
-|---|---|---|
-| `ab` | {q0}→{q1}→{q3} | ACCEPT |
-| `bab` | {q0}→{q1}→{q1,q2}→{q3} | ACCEPT |
+| Input  | Path                           | Result                                              |
+| ------ | ------------------------------ | --------------------------------------------------- |
+| `ab`   | {q0}→{q1}→{q3}                 | ACCEPT                                              |
+| `bab`  | {q0}→{q1}→{q1,q2}→{q3}         | ACCEPT                                              |
 | `abab` | {q0}→{q1}→{q1,q2}→{q1,q2}→{q3} | ...wait, actually {q0}→{q1}→{q1,q2}→{q3}→∅ = REJECT |
 
 Let me re-trace `abab`:
@@ -210,12 +206,12 @@ This is a valid **Type 3 Right-Linear Grammar** — confirms full round-trip: gr
 
 ## Quick-Reference Card
 
-| Concept | One-liner |
-|---|---|
-| Chomsky Type 3 | `A → aB or A → a` only. Maps to finite automaton. |
-| NDFA | δ returns a *set*. Superposition. Cannot deploy as-is. |
+| Concept               | One-liner                                                                 |
+| --------------------- | ------------------------------------------------------------------------- |
+| Chomsky Type 3        | `A → aB or A → a` only. Maps to finite automaton.                         |
+| NDFA                  | δ returns a *set*. Superposition. Cannot deploy as-is.                    |
 | Powerset Construction | Treat state-sets as nodes. BFS until stable. O(2^n) space, O(n) practice. |
-| Dead state ∅ | Total function requirement. Trap/sink for undefined transitions. |
-| Macro-state {q1,q2} | The union of two NDFA branches, collapsed into one DFA node. |
-| L(V13) | `a* b a* b` — strings over {a,b} with exactly 2 b's, ends with b. |
-| O(n) payoff | DFA execution is one lookup per character, no backtracking. |
+| Dead state ∅          | Total function requirement. Trap/sink for undefined transitions.          |
+| Macro-state {q1,q2}   | The union of two NDFA branches, collapsed into one DFA node.              |
+| L(V13)                | `a* b a* b` — strings over {a,b} with exactly 2 b's, ends with b.         |
+| O(n) payoff           | DFA execution is one lookup per character, no backtracking.               |

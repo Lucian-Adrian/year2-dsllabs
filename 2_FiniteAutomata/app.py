@@ -13,7 +13,6 @@ from typing import Dict, List, Optional
 
 import streamlit as st
 import streamlit.components.v1 as components
-
 from src.grammar import Grammar
 from src.ndfa import NDFA
 from src.powerset import DFA, powerset_construction
@@ -224,8 +223,8 @@ with st.sidebar:
     st.markdown("---")
 
     include_dead = st.checkbox("Include dead state in DFA", value=True)
-    show_grammar = st.checkbox("Show grammar productions",  value=True)
-    show_table   = st.checkbox("Show construction table",   value=True)
+    show_grammar = st.checkbox("Show grammar productions", value=True)
+    show_table = st.checkbox("Show construction table", value=True)
 
     st.markdown("---")
     _src = "Uploaded file" if upload is not None else f"Variant {selected_variant}"
@@ -272,7 +271,11 @@ if upload is None and _prev != selected_variant:
     st.session_state["dfa"] = None
     st.session_state["_loaded_variant"] = selected_variant
 
-ndfa: NDFA = load_ndfa_from_bytes(upload.read()) if upload is not None else load_variant_ndfa(selected_variant)
+ndfa: NDFA = (
+    load_ndfa_from_bytes(upload.read())
+    if upload is not None
+    else load_variant_ndfa(selected_variant)
+)
 
 
 # ---------------------------------------------------------------------------
@@ -293,14 +296,17 @@ st.markdown(
 # ---------------------------------------------------------------------------
 st.markdown("## 01 &nbsp; Overview")
 
-det       = ndfa.is_deterministic()
+det = ndfa.is_deterministic()
 conflicts = ndfa.non_deterministic_sources()
-n_conf    = len(conflicts)
+n_conf = len(conflicts)
 
 c1, c2, c3 = st.columns(3)
-with c1: st.metric("States",      len(ndfa.states))
-with c2: st.metric("Alphabet",    len(ndfa.alphabet))
-with c3: st.metric("Transitions", sum(len(v) for v in ndfa.transitions.values()))
+with c1:
+    st.metric("States", len(ndfa.states))
+with c2:
+    st.metric("Alphabet", len(ndfa.alphabet))
+with c3:
+    st.metric("Transitions", sum(len(v) for v in ndfa.transitions.values()))
 
 if det:
     st.markdown(
@@ -310,31 +316,36 @@ if det:
 else:
     st.markdown(
         f'<div class="banner banner-error">'
-        f'<strong>Non-deterministic</strong>'
-        f' &mdash; {n_conf} ambiguous transition{"s" if n_conf != 1 else ""}'
-        f'</div>',
+        f"<strong>Non-deterministic</strong>"
+        f" &mdash; {n_conf} ambiguous transition{'s' if n_conf != 1 else ''}"
+        f"</div>",
         unsafe_allow_html=True,
     )
     with st.expander("Conflict details"):
         rows = []
         for s, sym in conflicts:
             targets = sorted(ndfa.transitions[(s, sym)])
-            rows.append({
-                "State": s, "Symbol": sym,
-                "Targets": "{" + ", ".join(targets) + "}",
-                "Count": len(targets),
-            })
+            rows.append(
+                {
+                    "State": s,
+                    "Symbol": sym,
+                    "Targets": "{" + ", ".join(targets) + "}",
+                    "Count": len(targets),
+                }
+            )
         st.table(rows)
 
 with st.expander("Transition table"):
     rows = []
     for (state, sym), targets in sorted(ndfa.transitions.items()):
-        rows.append({
-            "From":      state,
-            "On":        sym,
-            "To":        "{" + ", ".join(sorted(targets)) + "}",
-            "Ambiguous": "yes" if len(targets) > 1 else "",
-        })
+        rows.append(
+            {
+                "From": state,
+                "On": sym,
+                "To": "{" + ", ".join(sorted(targets)) + "}",
+                "Ambiguous": "yes" if len(targets) > 1 else "",
+            }
+        )
     st.table(rows)
 
 
@@ -367,8 +378,8 @@ _, type_label, evidence = grammar.classify_chomsky()
 
 st.markdown(
     f'<div class="banner banner-info">'
-    f'Grammar extracted from NDFA &mdash; <strong>{type_label}</strong>'
-    f'</div>',
+    f"Grammar extracted from NDFA &mdash; <strong>{type_label}</strong>"
+    f"</div>",
     unsafe_allow_html=True,
 )
 
@@ -408,28 +419,32 @@ if compile_btn:
 dfa: Optional[DFA] = st.session_state.get("dfa")
 
 if dfa is not None:
-    worst  = 2 ** len(ndfa.states)
+    worst = 2 ** len(ndfa.states)
     pruned = worst - len(dfa.states)
 
     st.markdown(
         f'<div class="banner banner-ok">'
-        f'DFA generated &mdash; <strong>{len(dfa.states)}</strong> states'
-        f' &nbsp;&middot;&nbsp; {pruned} of {worst} macro-states pruned'
-        f'</div>',
+        f"DFA generated &mdash; <strong>{len(dfa.states)}</strong> states"
+        f" &nbsp;&middot;&nbsp; {pruned} of {worst} macro-states pruned"
+        f"</div>",
         unsafe_allow_html=True,
     )
     st.markdown("")
 
     m1, m2, m3, m4 = st.columns(4)
-    with m1: st.metric("DFA States",       len(dfa.states))
-    with m2: st.metric("Accepting States", len(dfa.accepting))
-    with m3: st.metric("DFA Transitions",  len(dfa.transitions))
-    with m4: st.metric(
-        f"Pruned (2^{len(ndfa.states)}={worst})",
-        pruned,
-        delta=f"-{pruned} states",
-        delta_color="normal",
-    )
+    with m1:
+        st.metric("DFA States", len(dfa.states))
+    with m2:
+        st.metric("Accepting States", len(dfa.accepting))
+    with m3:
+        st.metric("DFA Transitions", len(dfa.transitions))
+    with m4:
+        st.metric(
+            f"Pruned (2^{len(ndfa.states)}={worst})",
+            pruned,
+            delta=f"-{pruned} states",
+            delta_color="normal",
+        )
 
     # Side-by-side
     st.markdown("### Comparison")
@@ -463,7 +478,7 @@ if dfa is not None:
 
     # DFA grammar
     st.markdown("### DFA Grammar")
-    dfa_prods   = dfa.to_grammar()
+    dfa_prods = dfa.to_grammar()
     dfa_grammar = Grammar.from_fa_productions(
         non_terminals=set(dfa.states),
         terminals=set(dfa.alphabet),
@@ -473,9 +488,9 @@ if dfa is not None:
     _, dfa_type_label, _ = dfa_grammar.classify_chomsky()
     st.markdown(
         f'<div class="banner banner-info">'
-        f'DFA grammar &mdash; <strong>{dfa_type_label}</strong>'
-        f' &nbsp;&middot;&nbsp; classification preserved'
-        f'</div>',
+        f"DFA grammar &mdash; <strong>{dfa_type_label}</strong>"
+        f" &nbsp;&middot;&nbsp; classification preserved"
+        f"</div>",
         unsafe_allow_html=True,
     )
 
@@ -501,7 +516,8 @@ if dfa is not None:
     with s_col:
         step = (
             st.slider("Step", 0, len(test_string), len(test_string))
-            if test_string else 0
+            if test_string
+            else 0
         )
 
     if test_string:
@@ -539,26 +555,25 @@ if dfa is not None:
             if accepted:
                 st.markdown(
                     f'<div class="verdict verdict-accept">'
-                    f'{test_string!r} &mdash; ACCEPTED &nbsp;&middot;&nbsp; '
-                    f'final state: {full_path[-1]}'
-                    f'</div>',
+                    f"{test_string!r} &mdash; ACCEPTED &nbsp;&middot;&nbsp; "
+                    f"final state: {full_path[-1]}"
+                    f"</div>",
                     unsafe_allow_html=True,
                 )
             else:
                 note = " (dead state)" if full_path[-1] == dfa.DEAD_LABEL else ""
                 st.markdown(
                     f'<div class="verdict verdict-reject">'
-                    f'{test_string!r} &mdash; REJECTED{note} &nbsp;&middot;&nbsp; '
-                    f'final state: {full_path[-1]}'
-                    f'</div>',
+                    f"{test_string!r} &mdash; REJECTED{note} &nbsp;&middot;&nbsp; "
+                    f"final state: {full_path[-1]}"
+                    f"</div>",
                     unsafe_allow_html=True,
                 )
 
 else:
     st.markdown(
         '<div class="banner banner-info">'
-        'Click <strong>Run Subset Construction</strong> above to compile the NDFA into a DFA.'
-        '</div>',
+        "Click <strong>Run Subset Construction</strong> above to compile the NDFA into a DFA."
+        "</div>",
         unsafe_allow_html=True,
     )
-

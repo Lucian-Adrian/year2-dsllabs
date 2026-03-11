@@ -1,5 +1,5 @@
 """
-Visualizer — Layer 5: Interactive Graph Renderer.
+Visualizer Layer 5: Interactive Graph Renderer.
 
 Generates interactive, physics-based HTML graphs using PyVis.
 The HTML is returned as a string and can be embedded in the Streamlit
@@ -29,6 +29,7 @@ if TYPE_CHECKING:
 # ---------------------------------------------------------------------------
 # Shared builder helpers
 # ---------------------------------------------------------------------------
+
 
 def _new_net(height: str = "500px", physics: bool = True) -> Network:
     # cdn_resources="in_line" embeds vis.js directly in the HTML blob.
@@ -75,25 +76,53 @@ def _node_style(
 ) -> Dict:
     """Return PyVis node kwargs."""
     if is_dead:
-        color = {"border": "#333", "background": "#1a1a1a", "highlight": {"background": "#222"}}
+        color = {
+            "border": "#333",
+            "background": "#1a1a1a",
+            "highlight": {"background": "#222"},
+        }
         shape = "dot"
     elif is_active:
-        color = {"border": "#ffffff", "background": "#ffffff", "highlight": {"background": "#ededed"}}
+        color = {
+            "border": "#ffffff",
+            "background": "#ffffff",
+            "highlight": {"background": "#ededed"},
+        }
         shape = "ellipse"
     elif is_conflict:
-        color = {"border": "#dc2626", "background": "#450a0a", "highlight": {"background": "#7f1d1d"}}
+        color = {
+            "border": "#dc2626",
+            "background": "#450a0a",
+            "highlight": {"background": "#7f1d1d"},
+        }
         shape = "ellipse"
     elif is_accepting and is_start:
-        color = {"border": "#16a34a", "background": "#052e16", "highlight": {"background": "#14532d"}}
+        color = {
+            "border": "#16a34a",
+            "background": "#052e16",
+            "highlight": {"background": "#14532d"},
+        }
         shape = "ellipse"
     elif is_accepting:
-        color = {"border": "#16a34a", "background": "#052e16", "highlight": {"background": "#14532d"}}
+        color = {
+            "border": "#16a34a",
+            "background": "#052e16",
+            "highlight": {"background": "#14532d"},
+        }
         shape = "ellipse"
     elif is_start:
-        color = {"border": "#2563eb", "background": "#03173a", "highlight": {"background": "#1e3a6e"}}
+        color = {
+            "border": "#2563eb",
+            "background": "#03173a",
+            "highlight": {"background": "#1e3a6e"},
+        }
         shape = "ellipse"
     else:
-        color = {"border": "#404040", "background": "#1a1a1a", "highlight": {"background": "#262626"}}
+        color = {
+            "border": "#404040",
+            "background": "#1a1a1a",
+            "highlight": {"background": "#262626"},
+        }
         shape = "ellipse"
 
     border_width = 2 if (is_start or is_accepting) else 1
@@ -125,6 +154,7 @@ def _merge_edge_labels(transitions: dict) -> Dict:
 # NDFA visualisation
 # ---------------------------------------------------------------------------
 
+
 def ndfa_to_html(
     ndfa: "NDFA",
     active_state: Optional[str] = None,
@@ -152,8 +182,11 @@ def ndfa_to_html(
     merged = _merge_edge_labels(ndfa.transitions)
     for (src, tgt), lbl in merged.items():
         net.add_edge(
-            src, tgt, label=lbl,
-            color="#555555", width=1,
+            src,
+            tgt,
+            label=lbl,
+            color="#555555",
+            width=1,
             font={"size": 12, "color": "#999999"},
             arrows="to",
         )
@@ -164,6 +197,7 @@ def ndfa_to_html(
 # ---------------------------------------------------------------------------
 # DFA visualisation (with optional active-state trace)
 # ---------------------------------------------------------------------------
+
 
 def dfa_to_html(
     dfa: "DFA",
@@ -201,8 +235,11 @@ def dfa_to_html(
         else:
             edge_color = "#555555"
         net.add_edge(
-            src, tgt, label=lbl,
-            color=edge_color, width=1,
+            src,
+            tgt,
+            label=lbl,
+            color=edge_color,
+            width=1,
             font={"size": 12, "color": "#999999"},
             arrows="to",
         )

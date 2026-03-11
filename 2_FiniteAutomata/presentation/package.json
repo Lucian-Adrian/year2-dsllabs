@@ -1,13 +1,15 @@
 {
-  "name": "state-space-compiler-slides",
-  "private": true,
-  "scripts": {
-    "dev":   "slidev slides.md --open",
-    "build": "slidev build slides.md --out dist",
-    "export": "slidev export slides.md --format pdf"
-  },
-  "dependencies": {
-    "@slidev/cli":   "^0.50.0",
-    "@slidev/theme-default": "latest"
-  }
+	"name": "state-space-compiler-slides",
+	"private": true,
+	"scripts": {
+		"dev": "slidev slides.md --open",
+		"build": "slidev build slides.md --out dist",
+		"export": "slidev export slides.md --format pdf"
+	},
+	"dependencies": {
+		"@slidev/cli": "^0.50.0",
+		"@slidev/theme-default": "latest",
+		"@slidev/theme-seriph": "^0.25.0",
+		"mermaid": "^11.12.3"
+	}
 }
