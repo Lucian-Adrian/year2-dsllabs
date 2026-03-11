@@ -7,3 +7,8 @@ report.tex
 preamble.tex
 /groman
 /tasks
+
+# ignore presentation deps
+/2_FiniteAutomata/presentation/node_modules/
+/2_FiniteAutomata/presentation/package-lock.json
+/package-lock.json
