@@ -1,0 +1,38 @@
+---
+title: "variant 2 expression 1"
+---
+flowchart TD
+    classDef literal fill:#edf2ff,stroke:#3b5bdb,stroke-width:1px;
+    classDef concat fill:#f3faf7,stroke:#2f9e44,stroke-width:1px;
+    classDef alternation fill:#fff9db,stroke:#f08c00,stroke-width:1px;
+    classDef repeat fill:#fff0f6,stroke:#c2255c,stroke-width:1px;
+    N0["Concatenation 5 parts"]
+    N1["Repeat 0..1"]
+    N2["Literal M"]
+    N1 -->|repeat 0..1| N2
+    N0 -->|part 1| N1
+    N3["Repeat 2..2"]
+    N4["Literal N"]
+    N3 -->|repeat 2..2| N4
+    N0 -->|part 2| N3
+    N5["Repeat 3..3"]
+    N6["Alternation 2 options"]
+    N7["Literal O"]
+    N6 -->|option 1| N7
+    N8["Literal P"]
+    N6 -->|option 2| N8
+    N5 -->|repeat 3..3| N6
+    N0 -->|part 3| N5
+    N9["Repeat 0..inf"]
+    N10["Literal Q"]
+    N9 -->|repeat 0..inf| N10
+    N0 -->|part 4| N9
+    N11["Repeat 1..inf"]
+    N12["Literal R"]
+    N11 -->|repeat 1..inf| N12
+    N0 -->|part 5| N11
+    ROOT([Regex Root]) --> N0
+    class N2,N4,N7,N8,N10,N12 literal;
+    class N0 concat;
+    class N6 alternation;
+    class N1,N3,N5,N9,N11 repeat;

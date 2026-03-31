@@ -1,0 +1,12 @@
+flowchart LR
+    A[Input Regex] --> B[Normalization]
+    B --> C[Recursive-Descent Parser]
+    C --> D[AST Program]
+    D --> E[Bounded Generator]
+    E --> F[Candidate Words]
+    D --> G[Python Regex Compiler]
+    F --> H[Full-Match Validator]
+    G --> H
+    H --> I[Accepted Language Sample]
+    D --> J[Trace / Explainability]
+    J --> K[Mission Control Report]

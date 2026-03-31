@@ -1,0 +1,54 @@
+flowchart LR
+    S([Start]) --> T0["seeded decode"]
+    T1["01 concat | root | 6 parts"]
+    T0 --> T1
+    T2["02 literal | root.0 | '1'"]
+    T1 --> T2
+    T3["03 repeat | root.1 | 4 times (range 0..5)"]
+    T2 --> T3
+    T4["04 choose-alternative | root.1#0 | option 2 of 2"]
+    T3 --> T4
+    T5["05 literal | root.1#0|1 | '1'"]
+    T4 --> T5
+    T6["06 choose-alternative | root.1#1 | option 2 of 2"]
+    T5 --> T6
+    T7["07 literal | root.1#1|1 | '1'"]
+    T6 --> T7
+    T8["08 choose-alternative | root.1#2 | option 2 of 2"]
+    T7 --> T8
+    T9["09 literal | root.1#2|1 | '1'"]
+    T8 --> T9
+    T10["10 choose-alternative | root.1#3 | option 2 of 2"]
+    T9 --> T10
+    T11["11 literal | root.1#3|1 | '1'"]
+    T10 --> T11
+    T12["12 literal | root.2 | '2'"]
+    T11 --> T12
+    T13["13 repeat | root.3 | 5 times (range 5..5)"]
+    T12 --> T13
+    T14["14 choose-alternative | root.3#0 | option 1 of 2"]
+    T13 --> T14
+    T15["15 literal | root.3#0|0 | '3'"]
+    T14 --> T15
+    T16["16 choose-alternative | root.3#1 | option 1 of 2"]
+    T15 --> T16
+    T17["17 literal | root.3#1|0 | '3'"]
+    T16 --> T17
+    T18["18 choose-alternative | root.3#2 | option 1 of 2"]
+    T17 --> T18
+    T19["19 literal | root.3#2|0 | '3'"]
+    T18 --> T19
+    T20["20 choose-alternative | root.3#3 | option 1 of 2"]
+    T19 --> T20
+    T21["21 literal | root.3#3|0 | '3'"]
+    T20 --> T21
+    T22["22 choose-alternative | root.3#4 | option 1 of 2"]
+    T21 --> T22
+    T23["23 literal | root.3#4|0 | '3'"]
+    T22 --> T23
+    T24["24 literal | root.4 | '3'"]
+    T23 --> T24
+    T25["25 literal | root.5 | '6'"]
+    T24 --> T25
+    O(["output: 1111123333336"])
+    T25 --> O

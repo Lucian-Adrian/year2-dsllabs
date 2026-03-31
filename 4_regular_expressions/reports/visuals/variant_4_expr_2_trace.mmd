@@ -1,0 +1,34 @@
+flowchart LR
+    S([Start]) --> T0["seeded decode"]
+    T1["01 concat | root | 6 parts"]
+    T0 --> T1
+    T2["02 literal | root.0 | 'L'"]
+    T1 --> T2
+    T3["03 choose-alternative | root.1 | option 2 of 2"]
+    T2 --> T3
+    T4["04 literal | root.1|1 | 'N'"]
+    T3 --> T4
+    T5["05 repeat | root.2 | 3 times (range 3..3)"]
+    T4 --> T5
+    T6["06 literal | root.2#0 | 'O'"]
+    T5 --> T6
+    T7["07 literal | root.2#1 | 'O'"]
+    T6 --> T7
+    T8["08 literal | root.2#2 | 'O'"]
+    T7 --> T8
+    T9["09 repeat | root.3 | 3 times (range 0..5)"]
+    T8 --> T9
+    T10["10 literal | root.3#0 | 'P'"]
+    T9 --> T10
+    T11["11 literal | root.3#1 | 'P'"]
+    T10 --> T11
+    T12["12 literal | root.3#2 | 'P'"]
+    T11 --> T12
+    T13["13 literal | root.4 | 'Q'"]
+    T12 --> T13
+    T14["14 choose-alternative | root.5 | option 1 of 2"]
+    T13 --> T14
+    T15["15 literal | root.5|0 | '2'"]
+    T14 --> T15
+    O(["output: LNOOOPPPQ2"])
+    T15 --> O

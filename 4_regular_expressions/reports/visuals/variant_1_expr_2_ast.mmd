@@ -1,0 +1,44 @@
+---
+title: "variant 1 expression 2"
+---
+flowchart TD
+    classDef literal fill:#edf2ff,stroke:#3b5bdb,stroke-width:1px;
+    classDef concat fill:#f3faf7,stroke:#2f9e44,stroke-width:1px;
+    classDef alternation fill:#fff9db,stroke:#f08c00,stroke-width:1px;
+    classDef repeat fill:#fff0f6,stroke:#c2255c,stroke-width:1px;
+    N0["Concatenation 5 parts"]
+    N1["Literal P"]
+    N0 -->|part 1| N1
+    N2["Alternation 3 options"]
+    N3["Literal Q"]
+    N2 -->|option 1| N3
+    N4["Literal R"]
+    N2 -->|option 2| N4
+    N5["Literal S"]
+    N2 -->|option 3| N5
+    N0 -->|part 2| N2
+    N6["Literal T"]
+    N0 -->|part 3| N6
+    N7["Repeat 0..inf"]
+    N8["Alternation 3 options"]
+    N9["Concatenation 2 parts"]
+    N10["Literal U"]
+    N9 -->|part 1| N10
+    N11["Literal V"]
+    N9 -->|part 2| N11
+    N8 -->|option 1| N9
+    N12["Literal W"]
+    N8 -->|option 2| N12
+    N13["Literal X"]
+    N8 -->|option 3| N13
+    N7 -->|repeat 0..inf| N8
+    N0 -->|part 4| N7
+    N14["Repeat 1..inf"]
+    N15["Literal Z"]
+    N14 -->|repeat 1..inf| N15
+    N0 -->|part 5| N14
+    ROOT([Regex Root]) --> N0
+    class N1,N3,N4,N5,N6,N10,N11,N12,N13,N15 literal;
+    class N0,N9 concat;
+    class N2,N8 alternation;
+    class N7,N14 repeat;
