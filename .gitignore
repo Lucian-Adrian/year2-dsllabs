@@ -12,3 +12,7 @@ preamble.tex
 /2_FiniteAutomata/presentation/node_modules/
 /2_FiniteAutomata/presentation/package-lock.json
 /package-lock.json
+/4_regular_expressions/presentation/node_modules/
+/4_regular_expressions/presentation/dist/
+/4_regular_expressions/src/__pycache__/
+/4_regular_expressions/tests/__pycache__/

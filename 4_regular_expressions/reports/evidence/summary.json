@@ -1,0 +1,1311 @@
+{
+  "meta": {
+    "variant_count": 4,
+    "expression_count": 12,
+    "max_repeat": 5,
+    "sample_count": 4,
+    "max_results": 12,
+    "benchmark_iterations": 5,
+    "seed": 42,
+    "rough_path_total": 38628,
+    "heaviest_expression": {
+      "label": "variant 3",
+      "expression_index": 3,
+      "rough_paths": 29120
+    }
+  },
+  "variants": [
+    {
+      "label": "variant 1",
+      "expressions": [
+        {
+          "index": 1,
+          "expression": "(a|b)(c|d)E+G?",
+          "python_regex": "^(?:a|b)(?:c|d)(?:E)+(?:G)?$",
+          "metrics": {
+            "nodes": 11,
+            "depth": 3,
+            "alternations": 2,
+            "repeats": 2,
+            "literals": 6,
+            "rough_paths": 40
+          },
+          "generated": [
+            "acE",
+            "acEG",
+            "acEE",
+            "acEEG"
+          ],
+          "official_examples": [
+            "acEG",
+            "bdE",
+            "adEEG"
+          ],
+          "trace": {
+            "word": "acEEE",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "4 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.0|0",
+                "action": "literal",
+                "detail": "'a'"
+              },
+              {
+                "path": "root.1",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.1|0",
+                "action": "literal",
+                "detail": "'c'"
+              },
+              {
+                "path": "root.2",
+                "action": "repeat",
+                "detail": "3 times (range 1..5)"
+              },
+              {
+                "path": "root.2#0",
+                "action": "literal",
+                "detail": "'E'"
+              },
+              {
+                "path": "root.2#1",
+                "action": "literal",
+                "detail": "'E'"
+              },
+              {
+                "path": "root.2#2",
+                "action": "literal",
+                "detail": "'E'"
+              },
+              {
+                "path": "root.3",
+                "action": "repeat",
+                "detail": "0 times (range 0..1)"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.028,
+            "generate_ms": 0.0305,
+            "validate_ms": 0.0224
+          }
+        },
+        {
+          "index": 2,
+          "expression": "P(Q|R|S)T(UV|W|X)*Z+",
+          "python_regex": "^P(?:Q|R|S)T(?:(?:UV|W|X))*(?:Z)+$",
+          "metrics": {
+            "nodes": 16,
+            "depth": 5,
+            "alternations": 2,
+            "repeats": 2,
+            "literals": 10,
+            "rough_paths": 5460
+          },
+          "generated": [
+            "PQTZ",
+            "PQTZZ",
+            "PQTZZZ",
+            "PQTZZZZ"
+          ],
+          "official_examples": [
+            "PQTUVUVZ",
+            "PRTWWWWZ"
+          ],
+          "trace": {
+            "word": "PSTZZZZZ",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "5 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "literal",
+                "detail": "'P'"
+              },
+              {
+                "path": "root.1",
+                "action": "choose-alternative",
+                "detail": "option 3 of 3"
+              },
+              {
+                "path": "root.1|2",
+                "action": "literal",
+                "detail": "'S'"
+              },
+              {
+                "path": "root.2",
+                "action": "literal",
+                "detail": "'T'"
+              },
+              {
+                "path": "root.3",
+                "action": "repeat",
+                "detail": "0 times (range 0..5)"
+              },
+              {
+                "path": "root.4",
+                "action": "repeat",
+                "detail": "5 times (range 1..5)"
+              },
+              {
+                "path": "root.4#0",
+                "action": "literal",
+                "detail": "'Z'"
+              },
+              {
+                "path": "root.4#1",
+                "action": "literal",
+                "detail": "'Z'"
+              },
+              {
+                "path": "root.4#2",
+                "action": "literal",
+                "detail": "'Z'"
+              },
+              {
+                "path": "root.4#3",
+                "action": "literal",
+                "detail": "'Z'"
+              },
+              {
+                "path": "root.4#4",
+                "action": "literal",
+                "detail": "'Z'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.053,
+            "generate_ms": 0.0506,
+            "validate_ms": 0.0196
+          }
+        },
+        {
+          "index": 3,
+          "expression": "1(0|1)*2(3|4)^5(3)(6)",
+          "python_regex": "^1(?:(?:0|1))*2(?:(?:3|4)){5}36$",
+          "metrics": {
+            "nodes": 13,
+            "depth": 4,
+            "alternations": 2,
+            "repeats": 2,
+            "literals": 8,
+            "rough_paths": 2016
+          },
+          "generated": [
+            "123333336",
+            "123333436",
+            "123334336",
+            "123334436"
+          ],
+          "official_examples": [
+            "1023333336",
+            "1124444436"
+          ],
+          "trace": {
+            "word": "1101124433436",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "6 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "literal",
+                "detail": "'1'"
+              },
+              {
+                "path": "root.1",
+                "action": "repeat",
+                "detail": "4 times (range 0..5)"
+              },
+              {
+                "path": "root.1#0",
+                "action": "choose-alternative",
+                "detail": "option 2 of 2"
+              },
+              {
+                "path": "root.1#0|1",
+                "action": "literal",
+                "detail": "'1'"
+              },
+              {
+                "path": "root.1#1",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.1#1|0",
+                "action": "literal",
+                "detail": "'0'"
+              },
+              {
+                "path": "root.1#2",
+                "action": "choose-alternative",
+                "detail": "option 2 of 2"
+              },
+              {
+                "path": "root.1#2|1",
+                "action": "literal",
+                "detail": "'1'"
+              },
+              {
+                "path": "root.1#3",
+                "action": "choose-alternative",
+                "detail": "option 2 of 2"
+              },
+              {
+                "path": "root.1#3|1",
+                "action": "literal",
+                "detail": "'1'"
+              },
+              {
+                "path": "root.2",
+                "action": "literal",
+                "detail": "'2'"
+              },
+              {
+                "path": "root.3",
+                "action": "repeat",
+                "detail": "5 times (range 5..5)"
+              },
+              {
+                "path": "root.3#0",
+                "action": "choose-alternative",
+                "detail": "option 2 of 2"
+              },
+              {
+                "path": "root.3#0|1",
+                "action": "literal",
+                "detail": "'4'"
+              },
+              {
+                "path": "root.3#1",
+                "action": "choose-alternative",
+                "detail": "option 2 of 2"
+              },
+              {
+                "path": "root.3#1|1",
+                "action": "literal",
+                "detail": "'4'"
+              },
+              {
+                "path": "root.3#2",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.3#2|0",
+                "action": "literal",
+                "detail": "'3'"
+              },
+              {
+                "path": "root.3#3",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.3#3|0",
+                "action": "literal",
+                "detail": "'3'"
+              },
+              {
+                "path": "root.3#4",
+                "action": "choose-alternative",
+                "detail": "option 2 of 2"
+              },
+              {
+                "path": "root.3#4|1",
+                "action": "literal",
+                "detail": "'4'"
+              },
+              {
+                "path": "root.4",
+                "action": "literal",
+                "detail": "'3'"
+              },
+              {
+                "path": "root.5",
+                "action": "literal",
+                "detail": "'6'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.0805,
+            "generate_ms": 0.0706,
+            "validate_ms": 0.0289
+          }
+        }
+      ]
+    },
+    {
+      "label": "variant 2",
+      "expressions": [
+        {
+          "index": 1,
+          "expression": "M?N^2(O|P)^3Q*R+",
+          "python_regex": "^(?:M)?(?:N){2}(?:(?:O|P)){3}(?:Q)*(?:R)+$",
+          "metrics": {
+            "nodes": 13,
+            "depth": 4,
+            "alternations": 1,
+            "repeats": 5,
+            "literals": 6,
+            "rough_paths": 480
+          },
+          "generated": [
+            "NNOOOR",
+            "NNOOORR",
+            "NNOOORRR",
+            "NNOOORRRR"
+          ],
+          "official_examples": [
+            "MNNOOOQR",
+            "NNPPPQQQRRR"
+          ],
+          "trace": {
+            "word": "NNOPOQQR",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "5 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "repeat",
+                "detail": "0 times (range 0..1)"
+              },
+              {
+                "path": "root.1",
+                "action": "repeat",
+                "detail": "2 times (range 2..2)"
+              },
+              {
+                "path": "root.1#0",
+                "action": "literal",
+                "detail": "'N'"
+              },
+              {
+                "path": "root.1#1",
+                "action": "literal",
+                "detail": "'N'"
+              },
+              {
+                "path": "root.2",
+                "action": "repeat",
+                "detail": "3 times (range 3..3)"
+              },
+              {
+                "path": "root.2#0",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.2#0|0",
+                "action": "literal",
+                "detail": "'O'"
+              },
+              {
+                "path": "root.2#1",
+                "action": "choose-alternative",
+                "detail": "option 2 of 2"
+              },
+              {
+                "path": "root.2#1|1",
+                "action": "literal",
+                "detail": "'P'"
+              },
+              {
+                "path": "root.2#2",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.2#2|0",
+                "action": "literal",
+                "detail": "'O'"
+              },
+              {
+                "path": "root.3",
+                "action": "repeat",
+                "detail": "2 times (range 0..5)"
+              },
+              {
+                "path": "root.3#0",
+                "action": "literal",
+                "detail": "'Q'"
+              },
+              {
+                "path": "root.3#1",
+                "action": "literal",
+                "detail": "'Q'"
+              },
+              {
+                "path": "root.4",
+                "action": "repeat",
+                "detail": "1 times (range 1..5)"
+              },
+              {
+                "path": "root.4#0",
+                "action": "literal",
+                "detail": "'R'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.0346,
+            "generate_ms": 0.0684,
+            "validate_ms": 0.0319
+          }
+        },
+        {
+          "index": 2,
+          "expression": "(X|Y|Z)^3(8)+(9|0)",
+          "python_regex": "^(?:(?:X|Y|Z)){3}(?:8)+(?:9|0)$",
+          "metrics": {
+            "nodes": 11,
+            "depth": 4,
+            "alternations": 2,
+            "repeats": 2,
+            "literals": 6,
+            "rough_paths": 270
+          },
+          "generated": [
+            "XXX89",
+            "XXX80",
+            "XXX889",
+            "XXX880"
+          ],
+          "official_examples": [
+            "XXX89",
+            "YYY88889"
+          ],
+          "trace": {
+            "word": "YZZ89",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "3 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "repeat",
+                "detail": "3 times (range 3..3)"
+              },
+              {
+                "path": "root.0#0",
+                "action": "choose-alternative",
+                "detail": "option 2 of 3"
+              },
+              {
+                "path": "root.0#0|1",
+                "action": "literal",
+                "detail": "'Y'"
+              },
+              {
+                "path": "root.0#1",
+                "action": "choose-alternative",
+                "detail": "option 3 of 3"
+              },
+              {
+                "path": "root.0#1|2",
+                "action": "literal",
+                "detail": "'Z'"
+              },
+              {
+                "path": "root.0#2",
+                "action": "choose-alternative",
+                "detail": "option 3 of 3"
+              },
+              {
+                "path": "root.0#2|2",
+                "action": "literal",
+                "detail": "'Z'"
+              },
+              {
+                "path": "root.1",
+                "action": "repeat",
+                "detail": "1 times (range 1..5)"
+              },
+              {
+                "path": "root.1#0",
+                "action": "literal",
+                "detail": "'8'"
+              },
+              {
+                "path": "root.2",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.2|0",
+                "action": "literal",
+                "detail": "'9'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.0369,
+            "generate_ms": 0.0392,
+            "validate_ms": 0.0135
+          }
+        },
+        {
+          "index": 3,
+          "expression": "(H|I)(J|K)L*N?",
+          "python_regex": "^(?:H|I)(?:J|K)(?:L)*(?:N)?$",
+          "metrics": {
+            "nodes": 11,
+            "depth": 3,
+            "alternations": 2,
+            "repeats": 2,
+            "literals": 6,
+            "rough_paths": 48
+          },
+          "generated": [
+            "HJ",
+            "HJN",
+            "HJL",
+            "HJLN"
+          ],
+          "official_examples": [
+            "HJLLN",
+            "IKLLLLLL"
+          ],
+          "trace": {
+            "word": "IJLLLN",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "4 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "choose-alternative",
+                "detail": "option 2 of 2"
+              },
+              {
+                "path": "root.0|1",
+                "action": "literal",
+                "detail": "'I'"
+              },
+              {
+                "path": "root.1",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.1|0",
+                "action": "literal",
+                "detail": "'J'"
+              },
+              {
+                "path": "root.2",
+                "action": "repeat",
+                "detail": "3 times (range 0..5)"
+              },
+              {
+                "path": "root.2#0",
+                "action": "literal",
+                "detail": "'L'"
+              },
+              {
+                "path": "root.2#1",
+                "action": "literal",
+                "detail": "'L'"
+              },
+              {
+                "path": "root.2#2",
+                "action": "literal",
+                "detail": "'L'"
+              },
+              {
+                "path": "root.3",
+                "action": "repeat",
+                "detail": "1 times (range 0..1)"
+              },
+              {
+                "path": "root.3#0",
+                "action": "literal",
+                "detail": "'N'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.027,
+            "generate_ms": 0.0374,
+            "validate_ms": 0.0161
+          }
+        }
+      ]
+    },
+    {
+      "label": "variant 3",
+      "expressions": [
+        {
+          "index": 1,
+          "expression": "O(P|Q|R)+2(3|4)",
+          "python_regex": "^O(?:(?:P|Q|R))+2(?:3|4)$",
+          "metrics": {
+            "nodes": 11,
+            "depth": 4,
+            "alternations": 2,
+            "repeats": 1,
+            "literals": 7,
+            "rough_paths": 726
+          },
+          "generated": [
+            "OP23",
+            "OP24",
+            "OQ23",
+            "OQ24"
+          ],
+          "official_examples": [
+            "OPP23",
+            "OQQQQ24"
+          ],
+          "trace": {
+            "word": "ORPRR23",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "4 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "literal",
+                "detail": "'O'"
+              },
+              {
+                "path": "root.1",
+                "action": "repeat",
+                "detail": "4 times (range 1..5)"
+              },
+              {
+                "path": "root.1#0",
+                "action": "choose-alternative",
+                "detail": "option 3 of 3"
+              },
+              {
+                "path": "root.1#0|2",
+                "action": "literal",
+                "detail": "'R'"
+              },
+              {
+                "path": "root.1#1",
+                "action": "choose-alternative",
+                "detail": "option 1 of 3"
+              },
+              {
+                "path": "root.1#1|0",
+                "action": "literal",
+                "detail": "'P'"
+              },
+              {
+                "path": "root.1#2",
+                "action": "choose-alternative",
+                "detail": "option 3 of 3"
+              },
+              {
+                "path": "root.1#2|2",
+                "action": "literal",
+                "detail": "'R'"
+              },
+              {
+                "path": "root.1#3",
+                "action": "choose-alternative",
+                "detail": "option 3 of 3"
+              },
+              {
+                "path": "root.1#3|2",
+                "action": "literal",
+                "detail": "'R'"
+              },
+              {
+                "path": "root.2",
+                "action": "literal",
+                "detail": "'2'"
+              },
+              {
+                "path": "root.3",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.3|0",
+                "action": "literal",
+                "detail": "'3'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.0347,
+            "generate_ms": 0.0276,
+            "validate_ms": 0.0136
+          }
+        },
+        {
+          "index": 2,
+          "expression": "A*B(C|D|E)F(G|H|I)^2",
+          "python_regex": "^(?:A)*B(?:C|D|E)F(?:(?:G|H|I)){2}$",
+          "metrics": {
+            "nodes": 14,
+            "depth": 4,
+            "alternations": 2,
+            "repeats": 2,
+            "literals": 9,
+            "rough_paths": 162
+          },
+          "generated": [
+            "BCFGG",
+            "BCFGH",
+            "BCFGI",
+            "BCFHG"
+          ],
+          "official_examples": [
+            "AAABCFGG",
+            "AAAAAABDFHH"
+          ],
+          "trace": {
+            "word": "AAAABDFGG",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "5 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "repeat",
+                "detail": "4 times (range 0..5)"
+              },
+              {
+                "path": "root.0#0",
+                "action": "literal",
+                "detail": "'A'"
+              },
+              {
+                "path": "root.0#1",
+                "action": "literal",
+                "detail": "'A'"
+              },
+              {
+                "path": "root.0#2",
+                "action": "literal",
+                "detail": "'A'"
+              },
+              {
+                "path": "root.0#3",
+                "action": "literal",
+                "detail": "'A'"
+              },
+              {
+                "path": "root.1",
+                "action": "literal",
+                "detail": "'B'"
+              },
+              {
+                "path": "root.2",
+                "action": "choose-alternative",
+                "detail": "option 2 of 3"
+              },
+              {
+                "path": "root.2|1",
+                "action": "literal",
+                "detail": "'D'"
+              },
+              {
+                "path": "root.3",
+                "action": "literal",
+                "detail": "'F'"
+              },
+              {
+                "path": "root.4",
+                "action": "repeat",
+                "detail": "2 times (range 2..2)"
+              },
+              {
+                "path": "root.4#0",
+                "action": "choose-alternative",
+                "detail": "option 1 of 3"
+              },
+              {
+                "path": "root.4#0|0",
+                "action": "literal",
+                "detail": "'G'"
+              },
+              {
+                "path": "root.4#1",
+                "action": "choose-alternative",
+                "detail": "option 1 of 3"
+              },
+              {
+                "path": "root.4#1|0",
+                "action": "literal",
+                "detail": "'G'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.0355,
+            "generate_ms": 0.0419,
+            "validate_ms": 0.0113
+          }
+        },
+        {
+          "index": 3,
+          "expression": "J+K(L|M|N)*O?(P|Q)^3",
+          "python_regex": "^(?:J)+K(?:(?:L|M|N))*(?:O)?(?:(?:P|Q)){3}$",
+          "metrics": {
+            "nodes": 15,
+            "depth": 4,
+            "alternations": 2,
+            "repeats": 4,
+            "literals": 8,
+            "rough_paths": 29120
+          },
+          "generated": [
+            "JKPPP",
+            "JKPPQ",
+            "JKPQP",
+            "JKPQQ"
+          ],
+          "official_examples": [
+            "JJKLOPPP",
+            "JKNQQQ"
+          ],
+          "trace": {
+            "word": "JKNPQP",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "5 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "repeat",
+                "detail": "1 times (range 1..5)"
+              },
+              {
+                "path": "root.0#0",
+                "action": "literal",
+                "detail": "'J'"
+              },
+              {
+                "path": "root.1",
+                "action": "literal",
+                "detail": "'K'"
+              },
+              {
+                "path": "root.2",
+                "action": "repeat",
+                "detail": "1 times (range 0..5)"
+              },
+              {
+                "path": "root.2#0",
+                "action": "choose-alternative",
+                "detail": "option 3 of 3"
+              },
+              {
+                "path": "root.2#0|2",
+                "action": "literal",
+                "detail": "'N'"
+              },
+              {
+                "path": "root.3",
+                "action": "repeat",
+                "detail": "0 times (range 0..1)"
+              },
+              {
+                "path": "root.4",
+                "action": "repeat",
+                "detail": "3 times (range 3..3)"
+              },
+              {
+                "path": "root.4#0",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.4#0|0",
+                "action": "literal",
+                "detail": "'P'"
+              },
+              {
+                "path": "root.4#1",
+                "action": "choose-alternative",
+                "detail": "option 2 of 2"
+              },
+              {
+                "path": "root.4#1|1",
+                "action": "literal",
+                "detail": "'Q'"
+              },
+              {
+                "path": "root.4#2",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.4#2|0",
+                "action": "literal",
+                "detail": "'P'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.0407,
+            "generate_ms": 0.0597,
+            "validate_ms": 0.0154
+          }
+        }
+      ]
+    },
+    {
+      "label": "variant 4",
+      "expressions": [
+        {
+          "index": 1,
+          "expression": "(S|T)(U|V)W*Y+24",
+          "python_regex": "^(?:S|T)(?:U|V)(?:W)*(?:Y)+24$",
+          "metrics": {
+            "nodes": 13,
+            "depth": 3,
+            "alternations": 2,
+            "repeats": 2,
+            "literals": 8,
+            "rough_paths": 120
+          },
+          "generated": [
+            "SUY24",
+            "SUYY24",
+            "SUYYY24",
+            "SUYYYY24"
+          ],
+          "official_examples": [
+            "SUWWY24",
+            "SVWY24"
+          ],
+          "trace": {
+            "word": "SUWWYYY24",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "6 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.0|0",
+                "action": "literal",
+                "detail": "'S'"
+              },
+              {
+                "path": "root.1",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.1|0",
+                "action": "literal",
+                "detail": "'U'"
+              },
+              {
+                "path": "root.2",
+                "action": "repeat",
+                "detail": "2 times (range 0..5)"
+              },
+              {
+                "path": "root.2#0",
+                "action": "literal",
+                "detail": "'W'"
+              },
+              {
+                "path": "root.2#1",
+                "action": "literal",
+                "detail": "'W'"
+              },
+              {
+                "path": "root.3",
+                "action": "repeat",
+                "detail": "3 times (range 1..5)"
+              },
+              {
+                "path": "root.3#0",
+                "action": "literal",
+                "detail": "'Y'"
+              },
+              {
+                "path": "root.3#1",
+                "action": "literal",
+                "detail": "'Y'"
+              },
+              {
+                "path": "root.3#2",
+                "action": "literal",
+                "detail": "'Y'"
+              },
+              {
+                "path": "root.4",
+                "action": "literal",
+                "detail": "'2'"
+              },
+              {
+                "path": "root.5",
+                "action": "literal",
+                "detail": "'4'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.0385,
+            "generate_ms": 0.0676,
+            "validate_ms": 0.0482
+          }
+        },
+        {
+          "index": 2,
+          "expression": "L(M|N)O^3P*Q(2|3)",
+          "python_regex": "^L(?:M|N)(?:O){3}(?:P)*Q(?:2|3)$",
+          "metrics": {
+            "nodes": 13,
+            "depth": 3,
+            "alternations": 2,
+            "repeats": 2,
+            "literals": 8,
+            "rough_paths": 24
+          },
+          "generated": [
+            "LMOOOQ2",
+            "LMOOOQ3",
+            "LMOOOPQ2",
+            "LMOOOPQ3"
+          ],
+          "official_examples": [
+            "LMOOOPPPQ2",
+            "LNOOOPQ3"
+          ],
+          "trace": {
+            "word": "LMOOOPPPPPQ2",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "6 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "literal",
+                "detail": "'L'"
+              },
+              {
+                "path": "root.1",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.1|0",
+                "action": "literal",
+                "detail": "'M'"
+              },
+              {
+                "path": "root.2",
+                "action": "repeat",
+                "detail": "3 times (range 3..3)"
+              },
+              {
+                "path": "root.2#0",
+                "action": "literal",
+                "detail": "'O'"
+              },
+              {
+                "path": "root.2#1",
+                "action": "literal",
+                "detail": "'O'"
+              },
+              {
+                "path": "root.2#2",
+                "action": "literal",
+                "detail": "'O'"
+              },
+              {
+                "path": "root.3",
+                "action": "repeat",
+                "detail": "5 times (range 0..5)"
+              },
+              {
+                "path": "root.3#0",
+                "action": "literal",
+                "detail": "'P'"
+              },
+              {
+                "path": "root.3#1",
+                "action": "literal",
+                "detail": "'P'"
+              },
+              {
+                "path": "root.3#2",
+                "action": "literal",
+                "detail": "'P'"
+              },
+              {
+                "path": "root.3#3",
+                "action": "literal",
+                "detail": "'P'"
+              },
+              {
+                "path": "root.3#4",
+                "action": "literal",
+                "detail": "'P'"
+              },
+              {
+                "path": "root.4",
+                "action": "literal",
+                "detail": "'Q'"
+              },
+              {
+                "path": "root.5",
+                "action": "choose-alternative",
+                "detail": "option 1 of 2"
+              },
+              {
+                "path": "root.5|0",
+                "action": "literal",
+                "detail": "'2'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.0415,
+            "generate_ms": 0.0547,
+            "validate_ms": 0.0299
+          }
+        },
+        {
+          "index": 3,
+          "expression": "R*S(T|U|V)W(X|Y|Z)^2",
+          "python_regex": "^(?:R)*S(?:T|U|V)W(?:(?:X|Y|Z)){2}$",
+          "metrics": {
+            "nodes": 14,
+            "depth": 4,
+            "alternations": 2,
+            "repeats": 2,
+            "literals": 9,
+            "rough_paths": 162
+          },
+          "generated": [
+            "STWXX",
+            "STWXY",
+            "STWXZ",
+            "STWYX"
+          ],
+          "official_examples": [
+            "RSTWXX",
+            "RRRSUWYY"
+          ],
+          "trace": {
+            "word": "RRSUWYY",
+            "steps": [
+              {
+                "path": "root",
+                "action": "concat",
+                "detail": "5 parts"
+              },
+              {
+                "path": "root.0",
+                "action": "repeat",
+                "detail": "2 times (range 0..5)"
+              },
+              {
+                "path": "root.0#0",
+                "action": "literal",
+                "detail": "'R'"
+              },
+              {
+                "path": "root.0#1",
+                "action": "literal",
+                "detail": "'R'"
+              },
+              {
+                "path": "root.1",
+                "action": "literal",
+                "detail": "'S'"
+              },
+              {
+                "path": "root.2",
+                "action": "choose-alternative",
+                "detail": "option 2 of 3"
+              },
+              {
+                "path": "root.2|1",
+                "action": "literal",
+                "detail": "'U'"
+              },
+              {
+                "path": "root.3",
+                "action": "literal",
+                "detail": "'W'"
+              },
+              {
+                "path": "root.4",
+                "action": "repeat",
+                "detail": "2 times (range 2..2)"
+              },
+              {
+                "path": "root.4#0",
+                "action": "choose-alternative",
+                "detail": "option 2 of 3"
+              },
+              {
+                "path": "root.4#0|1",
+                "action": "literal",
+                "detail": "'Y'"
+              },
+              {
+                "path": "root.4#1",
+                "action": "choose-alternative",
+                "detail": "option 2 of 3"
+              },
+              {
+                "path": "root.4#1|1",
+                "action": "literal",
+                "detail": "'Y'"
+              }
+            ]
+          },
+          "benchmark": {
+            "parse_ms": 0.1118,
+            "generate_ms": 0.082,
+            "validate_ms": 0.0306
+          }
+        }
+      ]
+    }
+  ]
+}

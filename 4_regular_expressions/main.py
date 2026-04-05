@@ -14,9 +14,11 @@ if str(ROOT_DIR) not in sys.path:
 
 _generator_mod = importlib.import_module("src.generator")
 _parser_mod = importlib.import_module("src.parser")
+_analysis_mod = importlib.import_module("src.analysis")
 _variants_mod = importlib.import_module("src.variants")
 _visualization_mod = importlib.import_module("src.visualization")
 
+build_lab_analysis = _analysis_mod.build_lab_analysis
 explain_generation = _generator_mod.explain_generation
 generate_language = _generator_mod.generate_language
 generate_random_word = _generator_mod.generate_random_word
@@ -28,6 +30,7 @@ ast_metrics = _visualization_mod.ast_metrics
 ast_to_mermaid = _visualization_mod.ast_to_mermaid
 generation_trace_to_mermaid = _visualization_mod.generation_trace_to_mermaid
 regex_pipeline_mermaid = _visualization_mod.regex_pipeline_mermaid
+write_analysis_bundle = _analysis_mod.write_analysis_bundle
 
 
 def _parse_args() -> argparse.Namespace:
@@ -89,6 +92,17 @@ def _parse_args() -> argparse.Namespace:
         "--mission-brief",
         action="store_true",
         help="Print deep mission-style analysis and ML analogy metadata.",
+    )
+    parser.add_argument(
+        "--export-analysis-dir",
+        default="",
+        help="Optional output directory for evidence bundle files (JSON, Markdown, transcript).",
+    )
+    parser.add_argument(
+        "--benchmark-iterations",
+        type=int,
+        default=10,
+        help="Iterations used for lightweight parse/generate/validate timing.",
     )
     return parser.parse_args()
 
@@ -183,8 +197,11 @@ def main() -> None:
     rng = random.Random(args.seed)
     targets = _targets_from_args(args)
     export_dir = Path(args.export_mermaid_dir) if args.export_mermaid_dir else None
+    analysis_dir = Path(args.export_analysis_dir) if args.export_analysis_dir else None
     if export_dir is not None:
         export_dir.mkdir(parents=True, exist_ok=True)
+    if analysis_dir is not None:
+        analysis_dir.mkdir(parents=True, exist_ok=True)
 
     print("Regular Expressions Lab 4 - dynamic generator")
     print(f"seed={args.seed}, max_repeat={args.max_repeat}, samples={args.samples}")
@@ -267,6 +284,18 @@ def main() -> None:
                 )
 
             print()
+
+    if analysis_dir is not None:
+        analysis = build_lab_analysis(
+            max_repeat=args.max_repeat,
+            max_results=args.max_results,
+            sample_count=args.samples,
+            seed=args.seed,
+            benchmark_iterations=args.benchmark_iterations,
+            targets=targets,
+        )
+        write_analysis_bundle(analysis_dir, analysis)
+        print(f"Analysis exported to: {analysis_dir}")
 
 
 if __name__ == "__main__":

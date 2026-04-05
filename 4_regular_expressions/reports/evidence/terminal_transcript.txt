@@ -1,0 +1,166 @@
+Regular Expressions Lab 4 - analysis transcript
+seed=42, max_repeat=5, samples=4, benchmark_iterations=5
+
+VARIANT 1
+---------
+Expression 1: (a|b)(c|d)E+G?
+Generated: {acE, acEG, acEE, acEEG}
+Task examples: {acEG, bdE, adEEG}
+Metrics: nodes=11, depth=3, alternations=2, repeats=2, rough_paths=40
+Benchmark: parse_ms=0.028, generate_ms=0.0305, validate_ms=0.0224
+Validation target: ^(?:a|b)(?:c|d)(?:E)+(?:G)?$
+Trace sample: acEEE
+  - path=root action=concat detail=4 parts
+  - path=root.0 action=choose-alternative detail=option 1 of 2
+  - path=root.0|0 action=literal detail='a'
+  - path=root.1 action=choose-alternative detail=option 1 of 2
+  - path=root.1|0 action=literal detail='c'
+
+Expression 2: P(Q|R|S)T(UV|W|X)*Z+
+Generated: {PQTZ, PQTZZ, PQTZZZ, PQTZZZZ}
+Task examples: {PQTUVUVZ, PRTWWWWZ}
+Metrics: nodes=16, depth=5, alternations=2, repeats=2, rough_paths=5460
+Benchmark: parse_ms=0.053, generate_ms=0.0506, validate_ms=0.0196
+Validation target: ^P(?:Q|R|S)T(?:(?:UV|W|X))*(?:Z)+$
+Trace sample: PSTZZZZZ
+  - path=root action=concat detail=5 parts
+  - path=root.0 action=literal detail='P'
+  - path=root.1 action=choose-alternative detail=option 3 of 3
+  - path=root.1|2 action=literal detail='S'
+  - path=root.2 action=literal detail='T'
+
+Expression 3: 1(0|1)*2(3|4)^5(3)(6)
+Generated: {123333336, 123333436, 123334336, 123334436}
+Task examples: {1023333336, 1124444436}
+Metrics: nodes=13, depth=4, alternations=2, repeats=2, rough_paths=2016
+Benchmark: parse_ms=0.0805, generate_ms=0.0706, validate_ms=0.0289
+Validation target: ^1(?:(?:0|1))*2(?:(?:3|4)){5}36$
+Trace sample: 1101124433436
+  - path=root action=concat detail=6 parts
+  - path=root.0 action=literal detail='1'
+  - path=root.1 action=repeat detail=4 times (range 0..5)
+  - path=root.1#0 action=choose-alternative detail=option 2 of 2
+  - path=root.1#0|1 action=literal detail='1'
+
+VARIANT 2
+---------
+Expression 1: M?N^2(O|P)^3Q*R+
+Generated: {NNOOOR, NNOOORR, NNOOORRR, NNOOORRRR}
+Task examples: {MNNOOOQR, NNPPPQQQRRR}
+Metrics: nodes=13, depth=4, alternations=1, repeats=5, rough_paths=480
+Benchmark: parse_ms=0.0346, generate_ms=0.0684, validate_ms=0.0319
+Validation target: ^(?:M)?(?:N){2}(?:(?:O|P)){3}(?:Q)*(?:R)+$
+Trace sample: NNOPOQQR
+  - path=root action=concat detail=5 parts
+  - path=root.0 action=repeat detail=0 times (range 0..1)
+  - path=root.1 action=repeat detail=2 times (range 2..2)
+  - path=root.1#0 action=literal detail='N'
+  - path=root.1#1 action=literal detail='N'
+
+Expression 2: (X|Y|Z)^3(8)+(9|0)
+Generated: {XXX89, XXX80, XXX889, XXX880}
+Task examples: {XXX89, YYY88889}
+Metrics: nodes=11, depth=4, alternations=2, repeats=2, rough_paths=270
+Benchmark: parse_ms=0.0369, generate_ms=0.0392, validate_ms=0.0135
+Validation target: ^(?:(?:X|Y|Z)){3}(?:8)+(?:9|0)$
+Trace sample: YZZ89
+  - path=root action=concat detail=3 parts
+  - path=root.0 action=repeat detail=3 times (range 3..3)
+  - path=root.0#0 action=choose-alternative detail=option 2 of 3
+  - path=root.0#0|1 action=literal detail='Y'
+  - path=root.0#1 action=choose-alternative detail=option 3 of 3
+
+Expression 3: (H|I)(J|K)L*N?
+Generated: {HJ, HJN, HJL, HJLN}
+Task examples: {HJLLN, IKLLLLLL}
+Metrics: nodes=11, depth=3, alternations=2, repeats=2, rough_paths=48
+Benchmark: parse_ms=0.027, generate_ms=0.0374, validate_ms=0.0161
+Validation target: ^(?:H|I)(?:J|K)(?:L)*(?:N)?$
+Trace sample: IJLLLN
+  - path=root action=concat detail=4 parts
+  - path=root.0 action=choose-alternative detail=option 2 of 2
+  - path=root.0|1 action=literal detail='I'
+  - path=root.1 action=choose-alternative detail=option 1 of 2
+  - path=root.1|0 action=literal detail='J'
+
+VARIANT 3
+---------
+Expression 1: O(P|Q|R)+2(3|4)
+Generated: {OP23, OP24, OQ23, OQ24}
+Task examples: {OPP23, OQQQQ24}
+Metrics: nodes=11, depth=4, alternations=2, repeats=1, rough_paths=726
+Benchmark: parse_ms=0.0347, generate_ms=0.0276, validate_ms=0.0136
+Validation target: ^O(?:(?:P|Q|R))+2(?:3|4)$
+Trace sample: ORPRR23
+  - path=root action=concat detail=4 parts
+  - path=root.0 action=literal detail='O'
+  - path=root.1 action=repeat detail=4 times (range 1..5)
+  - path=root.1#0 action=choose-alternative detail=option 3 of 3
+  - path=root.1#0|2 action=literal detail='R'
+
+Expression 2: A*B(C|D|E)F(G|H|I)^2
+Generated: {BCFGG, BCFGH, BCFGI, BCFHG}
+Task examples: {AAABCFGG, AAAAAABDFHH}
+Metrics: nodes=14, depth=4, alternations=2, repeats=2, rough_paths=162
+Benchmark: parse_ms=0.0355, generate_ms=0.0419, validate_ms=0.0113
+Validation target: ^(?:A)*B(?:C|D|E)F(?:(?:G|H|I)){2}$
+Trace sample: AAAABDFGG
+  - path=root action=concat detail=5 parts
+  - path=root.0 action=repeat detail=4 times (range 0..5)
+  - path=root.0#0 action=literal detail='A'
+  - path=root.0#1 action=literal detail='A'
+  - path=root.0#2 action=literal detail='A'
+
+Expression 3: J+K(L|M|N)*O?(P|Q)^3
+Generated: {JKPPP, JKPPQ, JKPQP, JKPQQ}
+Task examples: {JJKLOPPP, JKNQQQ}
+Metrics: nodes=15, depth=4, alternations=2, repeats=4, rough_paths=29120
+Benchmark: parse_ms=0.0407, generate_ms=0.0597, validate_ms=0.0154
+Validation target: ^(?:J)+K(?:(?:L|M|N))*(?:O)?(?:(?:P|Q)){3}$
+Trace sample: JKNPQP
+  - path=root action=concat detail=5 parts
+  - path=root.0 action=repeat detail=1 times (range 1..5)
+  - path=root.0#0 action=literal detail='J'
+  - path=root.1 action=literal detail='K'
+  - path=root.2 action=repeat detail=1 times (range 0..5)
+
+VARIANT 4
+---------
+Expression 1: (S|T)(U|V)W*Y+24
+Generated: {SUY24, SUYY24, SUYYY24, SUYYYY24}
+Task examples: {SUWWY24, SVWY24}
+Metrics: nodes=13, depth=3, alternations=2, repeats=2, rough_paths=120
+Benchmark: parse_ms=0.0385, generate_ms=0.0676, validate_ms=0.0482
+Validation target: ^(?:S|T)(?:U|V)(?:W)*(?:Y)+24$
+Trace sample: SUWWYYY24
+  - path=root action=concat detail=6 parts
+  - path=root.0 action=choose-alternative detail=option 1 of 2
+  - path=root.0|0 action=literal detail='S'
+  - path=root.1 action=choose-alternative detail=option 1 of 2
+  - path=root.1|0 action=literal detail='U'
+
+Expression 2: L(M|N)O^3P*Q(2|3)
+Generated: {LMOOOQ2, LMOOOQ3, LMOOOPQ2, LMOOOPQ3}
+Task examples: {LMOOOPPPQ2, LNOOOPQ3}
+Metrics: nodes=13, depth=3, alternations=2, repeats=2, rough_paths=24
+Benchmark: parse_ms=0.0415, generate_ms=0.0547, validate_ms=0.0299
+Validation target: ^L(?:M|N)(?:O){3}(?:P)*Q(?:2|3)$
+Trace sample: LMOOOPPPPPQ2
+  - path=root action=concat detail=6 parts
+  - path=root.0 action=literal detail='L'
+  - path=root.1 action=choose-alternative detail=option 1 of 2
+  - path=root.1|0 action=literal detail='M'
+  - path=root.2 action=repeat detail=3 times (range 3..3)
+
+Expression 3: R*S(T|U|V)W(X|Y|Z)^2
+Generated: {STWXX, STWXY, STWXZ, STWYX}
+Task examples: {RSTWXX, RRRSUWYY}
+Metrics: nodes=14, depth=4, alternations=2, repeats=2, rough_paths=162
+Benchmark: parse_ms=0.1118, generate_ms=0.082, validate_ms=0.0306
+Validation target: ^(?:R)*S(?:T|U|V)W(?:(?:X|Y|Z)){2}$
+Trace sample: RRSUWYY
+  - path=root action=concat detail=5 parts
+  - path=root.0 action=repeat detail=2 times (range 0..5)
+  - path=root.0#0 action=literal detail='R'
+  - path=root.0#1 action=literal detail='R'
+  - path=root.1 action=literal detail='S'
