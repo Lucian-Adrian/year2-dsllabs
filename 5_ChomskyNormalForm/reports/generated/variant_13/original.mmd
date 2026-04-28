@@ -1,0 +1,62 @@
+flowchart TD
+    classDef nt fill:#1e293b,stroke:#38bdf8,color:#e2e8f0,stroke-width:1px;
+    classDef prod fill:#fff7ed,stroke:#fb923c,color:#7c2d12,stroke-width:1px;
+    classDef term fill:#ecfccb,stroke:#84cc16,color:#3f6212,stroke-width:1px;
+    ROOT(["Variant 13 original grammar"])
+    N_S["S"]
+    ROOT --> N_S
+    class N_S nt;
+    P_S_1["a B"]
+    N_S --> P_S_1
+    class P_S_1 prod;
+    T_a["a"]
+    P_S_1 --> T_a
+    class T_a term;
+    P_S_2["D A"]
+    N_S --> P_S_2
+    class P_S_2 prod;
+    N_A["A"]
+    ROOT --> N_A
+    class N_A nt;
+    P_A_1["a"]
+    N_A --> P_A_1
+    class P_A_1 prod;
+    T_a["a"]
+    P_A_1 --> T_a
+    class T_a term;
+    P_A_2["B D"]
+    N_A --> P_A_2
+    class P_A_2 prod;
+    P_A_3["b D A B"]
+    N_A --> P_A_3
+    class P_A_3 prod;
+    T_b["b"]
+    P_A_3 --> T_b
+    class T_b term;
+    N_B["B"]
+    ROOT --> N_B
+    class N_B nt;
+    P_B_1["b"]
+    N_B --> P_B_1
+    class P_B_1 prod;
+    T_b["b"]
+    P_B_1 --> T_b
+    class T_b term;
+    P_B_2["B A"]
+    N_B --> P_B_2
+    class P_B_2 prod;
+    N_D["D"]
+    ROOT --> N_D
+    class N_D nt;
+    P_D_1["ε"]
+    N_D --> P_D_1
+    class P_D_1 prod;
+    P_D_2["B A"]
+    N_D --> P_D_2
+    class P_D_2 prod;
+    N_C["C"]
+    ROOT --> N_C
+    class N_C nt;
+    P_C_1["B A"]
+    N_C --> P_C_1
+    class P_C_1 prod;

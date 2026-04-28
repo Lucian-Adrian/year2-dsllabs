@@ -1,0 +1,26 @@
+flowchart LR
+    classDef stage fill:#0f172a,stroke:#38bdf8,color:#e2e8f0,stroke-width:1px;
+    classDef success fill:#052e1a,stroke:#22c55e,color:#dcfce7,stroke-width:1px;
+    S0["Original<br/>10 productions"]
+    S1["Augment start symbol<br/>11 productions"]
+    S2["Eliminate ε-productions<br/>13 productions"]
+    S3["Eliminate unit productions<br/>22 productions"]
+    S4["Remove useless symbols<br/>15 productions"]
+    S5["Isolate terminals<br/>17 productions"]
+    S6["Binarize long productions<br/>23 productions"]
+    S7["Final cleanup<br/>23 productions"]
+    S0 --> S1
+    S1 --> S2
+    S2 --> S3
+    S3 --> S4
+    S4 --> S5
+    S5 --> S6
+    S6 --> S7
+    class S7 success;
+    class S0 stage;
+    class S1 stage;
+    class S2 stage;
+    class S3 stage;
+    class S4 stage;
+    class S5 stage;
+    class S6 stage;

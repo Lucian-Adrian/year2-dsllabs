@@ -1,0 +1,128 @@
+flowchart TD
+    classDef nt fill:#1e293b,stroke:#38bdf8,color:#e2e8f0,stroke-width:1px;
+    classDef prod fill:#fff7ed,stroke:#fb923c,color:#7c2d12,stroke-width:1px;
+    classDef term fill:#ecfccb,stroke:#84cc16,color:#3f6212,stroke-width:1px;
+    ROOT(["Variant 13 final CNF"])
+    N_T_b["T_b"]
+    ROOT --> N_T_b
+    class N_T_b nt;
+    P_T_b_1["b"]
+    N_T_b --> P_T_b_1
+    class P_T_b_1 prod;
+    T_b["b"]
+    P_T_b_1 --> T_b
+    class T_b term;
+    N_T_a["T_a"]
+    ROOT --> N_T_a
+    class N_T_a nt;
+    P_T_a_1["a"]
+    N_T_a --> P_T_a_1
+    class P_T_a_1 prod;
+    T_a["a"]
+    P_T_a_1 --> T_a
+    class T_a term;
+    N_D["D"]
+    ROOT --> N_D
+    class N_D nt;
+    P_D_1["B A"]
+    N_D --> P_D_1
+    class P_D_1 prod;
+    N_B["B"]
+    ROOT --> N_B
+    class N_B nt;
+    P_B_1["b"]
+    N_B --> P_B_1
+    class P_B_1 prod;
+    T_b["b"]
+    P_B_1 --> T_b
+    class T_b term;
+    P_B_2["B A"]
+    N_B --> P_B_2
+    class P_B_2 prod;
+    N_A["A"]
+    ROOT --> N_A
+    class N_A nt;
+    P_A_1["a"]
+    N_A --> P_A_1
+    class P_A_1 prod;
+    T_a["a"]
+    P_A_1 --> T_a
+    class T_a term;
+    P_A_2["B D"]
+    N_A --> P_A_2
+    class P_A_2 prod;
+    P_A_3["T_b H1"]
+    N_A --> P_A_3
+    class P_A_3 prod;
+    P_A_4["T_b H2"]
+    N_A --> P_A_4
+    class P_A_4 prod;
+    P_A_5["b"]
+    N_A --> P_A_5
+    class P_A_5 prod;
+    T_b["b"]
+    P_A_5 --> T_b
+    class T_b term;
+    P_A_6["B A"]
+    N_A --> P_A_6
+    class P_A_6 prod;
+    N_H1["H1"]
+    ROOT --> N_H1
+    class N_H1 nt;
+    P_H1_1["A B"]
+    N_H1 --> P_H1_1
+    class P_H1_1 prod;
+    N_H2["H2"]
+    ROOT --> N_H2
+    class N_H2 nt;
+    P_H2_1["D H3"]
+    N_H2 --> P_H2_1
+    class P_H2_1 prod;
+    N_H3["H3"]
+    ROOT --> N_H3
+    class N_H3 nt;
+    P_H3_1["A B"]
+    N_H3 --> P_H3_1
+    class P_H3_1 prod;
+    N_S0["S0"]
+    ROOT --> N_S0
+    class N_S0 nt;
+    P_S0_1["a"]
+    N_S0 --> P_S0_1
+    class P_S0_1 prod;
+    T_a["a"]
+    P_S0_1 --> T_a
+    class T_a term;
+    P_S0_2["B D"]
+    N_S0 --> P_S0_2
+    class P_S0_2 prod;
+    P_S0_3["T_b H4"]
+    N_S0 --> P_S0_3
+    class P_S0_3 prod;
+    P_S0_4["T_b H5"]
+    N_S0 --> P_S0_4
+    class P_S0_4 prod;
+    P_S0_5["T_a B"]
+    N_S0 --> P_S0_5
+    class P_S0_5 prod;
+    P_S0_6["D A"]
+    N_S0 --> P_S0_6
+    class P_S0_6 prod;
+    N_H4["H4"]
+    ROOT --> N_H4
+    class N_H4 nt;
+    P_H4_1["A B"]
+    N_H4 --> P_H4_1
+    class P_H4_1 prod;
+    N_H5["H5"]
+    ROOT --> N_H5
+    class N_H5 nt;
+    P_H5_1["D H6"]
+    N_H5 --> P_H5_1
+    class P_H5_1 prod;
+    N_H6["H6"]
+    ROOT --> N_H6
+    class N_H6 nt;
+    P_H6_1["A B"]
+    N_H6 --> P_H6_1
+    class P_H6_1 prod;

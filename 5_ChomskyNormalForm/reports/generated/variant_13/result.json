@@ -1,0 +1,154 @@
+{
+  "title": "Variant 13",
+  "original": {
+    "non_terminals": 5,
+    "terminals": 2,
+    "productions": 10,
+    "nullable": 1,
+    "start_symbol": "S"
+  },
+  "final": {
+    "non_terminals": 12,
+    "terminals": 2,
+    "productions": 23,
+    "nullable": 0,
+    "start_symbol": "S0"
+  },
+  "issues": [],
+  "steps": [
+    {
+      "title": "Augment start symbol",
+      "description": "Introduce a fresh start symbol so ε handling stays standard and the original start can be normalized safely.",
+      "notes": [
+        "New start symbol: S0"
+      ],
+      "added": [
+        "S0 → S"
+      ],
+      "removed": []
+    },
+    {
+      "title": "Eliminate ε-productions",
+      "description": "Generate nullable variants and remove empty productions everywhere except the fresh start symbol.",
+      "notes": [
+        "Nullable symbols: D"
+      ],
+      "added": [
+        "S → A",
+        "A → B",
+        "A → b A B"
+      ],
+      "removed": [
+        "D → ε"
+      ]
+    },
+    {
+      "title": "Eliminate unit productions",
+      "description": "Replace renaming chains with the non-unit productions they reach.",
+      "notes": [
+        "A -> {A, B}",
+        "B -> {B}",
+        "C -> {C}",
+        "D -> {D}",
+        "S -> {A, S}",
+        "S0 -> {A, S, S0}"
+      ],
+      "added": [
+        "S → a",
+        "S → B D",
+        "S → b A B",
+        "S → b D A B",
+        "A → b",
+        "A → B A",
+        "S0 → a",
+        "S0 → B D",
+        "S0 → b A B",
+        "S0 → b D A B",
+        "S0 → a B",
+        "S0 → D A"
+      ],
+      "removed": [
+        "S0 → S",
+        "S → A",
+        "A → B"
+      ]
+    },
+    {
+      "title": "Remove useless symbols",
+      "description": "Remove non-productive and inaccessible symbols so the grammar is minimal before the CNF rewrite stage.",
+      "notes": [
+        "Productive symbols: A, B, C, D, S, S0",
+        "Reachable symbols: A, B, D, S0"
+      ],
+      "added": [],
+      "removed": [
+        "S → a",
+        "S → B D",
+        "S → b A B",
+        "S → b D A B",
+        "S → a B",
+        "S → D A",
+        "C → B A"
+      ]
+    },
+    {
+      "title": "Isolate terminals",
+      "description": "Replace terminals that appear inside long productions with fresh pre-terminal symbols.",
+      "notes": [
+        "a -> T_a",
+        "b -> T_b"
+      ],
+      "added": [
+        "T_b → b",
+        "T_a → a",
+        "A → T_b A B",
+        "A → T_b D A B",
+        "S0 → T_b A B",
+        "S0 → T_b D A B",
+        "S0 → T_a B"
+      ],
+      "removed": [
+        "A → b A B",
+        "A → b D A B",
+        "S0 → b A B",
+        "S0 → b D A B",
+        "S0 → a B"
+      ]
+    },
+    {
+      "title": "Binarize long productions",
+      "description": "Break productions longer than two symbols into a chain of binary rules.",
+      "notes": [
+        "Helpers introduced: H1, H2, H3, H4, H5, H6"
+      ],
+      "added": [
+        "A → T_b H1",
+        "H1 → A B",
+        "A → T_b H2",
+        "H2 → D H3",
+        "H3 → A B",
+        "S0 → T_b H4",
+        "H4 → A B",
+        "S0 → T_b H5",
+        "H5 → D H6",
+        "H6 → A B"
+      ],
+      "removed": [
+        "A → T_b A B",
+        "A → T_b D A B",
+        "S0 → T_b A B",
+        "S0 → T_b D A B"
+      ]
+    },
+    {
+      "title": "Final cleanup",
+      "description": "Remove non-productive and inaccessible symbols so the grammar is minimal before the CNF rewrite stage.",
+      "notes": [
+        "Productive symbols: A, B, D, H1, H2, H3, H4, H5, H6, S0, T_a, T_b",
+        "Reachable symbols: A, B, D, H1, H2, H3, H4, H5, H6, S0, T_a, T_b"
+      ],
+      "added": [],
+      "removed": []
+    }
+  ]
+}

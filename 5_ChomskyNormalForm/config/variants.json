@@ -1,0 +1,1929 @@
+{
+  "source": "5_ChomskyNormalForm/variants.pdf",
+  "variants": {
+    "1": {
+      "variant": 1,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "ASC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aD"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "E",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "D",
+          "rhs": "abC"
+        }
+      ]
+    },
+    "2": {
+      "variant": 2,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "A",
+          "rhs": "B"
+        },
+        {
+          "lhs": "A",
+          "rhs": "b"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aD"
+        },
+        {
+          "lhs": "A",
+          "rhs": "AS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bAAB"
+        },
+        {
+          "lhs": "A",
+          "rhs": ""
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "C",
+          "rhs": "AB"
+        },
+        {
+          "lhs": "D",
+          "rhs": "BB"
+        }
+      ]
+    },
+    "3": {
+      "variant": 3,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "terminals": [
+        "a",
+        "d"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "dB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "A"
+        },
+        {
+          "lhs": "A",
+          "rhs": "d"
+        },
+        {
+          "lhs": "A",
+          "rhs": "dS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aAdAB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aC"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "E",
+          "rhs": "AS"
+        }
+      ]
+    },
+    "4": {
+      "variant": 4,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "A"
+        },
+        {
+          "lhs": "A",
+          "rhs": "B"
+        },
+        {
+          "lhs": "A",
+          "rhs": "AS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bBAB"
+        },
+        {
+          "lhs": "A",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aD"
+        },
+        {
+          "lhs": "B",
+          "rhs": ""
+        },
+        {
+          "lhs": "D",
+          "rhs": "AA"
+        },
+        {
+          "lhs": "C",
+          "rhs": "Ba"
+        }
+      ]
+    },
+    "5": {
+      "variant": 5,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b",
+        "d"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "dB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "A"
+        },
+        {
+          "lhs": "A",
+          "rhs": "d"
+        },
+        {
+          "lhs": "A",
+          "rhs": "dS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aBdB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "D",
+          "rhs": "AB"
+        },
+        {
+          "lhs": "C",
+          "rhs": "bC"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        }
+      ]
+    },
+    "6": {
+      "variant": 6,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "ASC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BC"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "E",
+          "rhs": "bB"
+        }
+      ]
+    },
+    "7": {
+      "variant": 7,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "B"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bAaAb"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aAa"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "AB"
+        },
+        {
+          "lhs": "E",
+          "rhs": "BA"
+        }
+      ]
+    },
+    "8": {
+      "variant": 8,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C"
+      ],
+      "terminals": [
+        "a",
+        "d"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "dB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "A"
+        },
+        {
+          "lhs": "A",
+          "rhs": "d"
+        },
+        {
+          "lhs": "A",
+          "rhs": "dS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aAdAB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "A"
+        },
+        {
+          "lhs": "B",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "Aa"
+        }
+      ]
+    },
+    "9": {
+      "variant": 9,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "BC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bAaAb"
+        },
+        {
+          "lhs": "B",
+          "rhs": "A"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aAa"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "AB"
+        },
+        {
+          "lhs": "D",
+          "rhs": "AB"
+        }
+      ]
+    },
+    "10": {
+      "variant": 10,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b",
+        "d"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "dB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "AB"
+        },
+        {
+          "lhs": "A",
+          "rhs": "d"
+        },
+        {
+          "lhs": "A",
+          "rhs": "dS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aAaAb"
+        },
+        {
+          "lhs": "A",
+          "rhs": ""
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "A"
+        },
+        {
+          "lhs": "D",
+          "rhs": "Aba"
+        }
+      ]
+    },
+    "11": {
+      "variant": 11,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "AbAa"
+        },
+        {
+          "lhs": "B",
+          "rhs": "BbaA"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bSa"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "D",
+          "rhs": "AB"
+        }
+      ]
+    },
+    "12": {
+      "variant": 12,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D",
+        "X"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "A"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aX"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bX"
+        },
+        {
+          "lhs": "X",
+          "rhs": ""
+        },
+        {
+          "lhs": "X",
+          "rhs": "BX"
+        },
+        {
+          "lhs": "X",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AD"
+        },
+        {
+          "lhs": "D",
+          "rhs": "aD"
+        },
+        {
+          "lhs": "D",
+          "rhs": "a"
+        },
+        {
+          "lhs": "C",
+          "rhs": "Ca"
+        }
+      ]
+    },
+    "13": {
+      "variant": 13,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "DA"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BD"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bDAB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "D",
+          "rhs": ""
+        },
+        {
+          "lhs": "D",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "C",
+          "rhs": "BA"
+        }
+      ]
+    },
+    "14": {
+      "variant": 14,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "A"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bAa"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AbB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "BS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "D",
+          "rhs": "a"
+        }
+      ]
+    },
+    "15": {
+      "variant": 15,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "B"
+        },
+        {
+          "lhs": "S",
+          "rhs": "aA"
+        },
+        {
+          "lhs": "A",
+          "rhs": ""
+        },
+        {
+          "lhs": "A",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "ABab"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "C",
+          "rhs": "abC"
+        },
+        {
+          "lhs": "D",
+          "rhs": "AB"
+        }
+      ]
+    },
+    "16": {
+      "variant": 16,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "abAB"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aSab"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aA"
+        },
+        {
+          "lhs": "A",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "B",
+          "rhs": "ababB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "AS"
+        }
+      ]
+    },
+    "17": {
+      "variant": 17,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "ASC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aD"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "E",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "D",
+          "rhs": "abC"
+        }
+      ]
+    },
+    "18": {
+      "variant": 18,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "B"
+        },
+        {
+          "lhs": "A",
+          "rhs": "b"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aD"
+        },
+        {
+          "lhs": "A",
+          "rhs": "AS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bAB"
+        },
+        {
+          "lhs": "A",
+          "rhs": ""
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "C",
+          "rhs": "AB"
+        },
+        {
+          "lhs": "D",
+          "rhs": "BB"
+        }
+      ]
+    },
+    "19": {
+      "variant": 19,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "terminals": [
+        "a",
+        "d"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "dB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "B"
+        },
+        {
+          "lhs": "A",
+          "rhs": "d"
+        },
+        {
+          "lhs": "A",
+          "rhs": "dS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aAdCB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aC"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "E",
+          "rhs": "AS"
+        }
+      ]
+    },
+    "20": {
+      "variant": 20,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "A"
+        },
+        {
+          "lhs": "A",
+          "rhs": "B"
+        },
+        {
+          "lhs": "A",
+          "rhs": "Sa"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bBA"
+        },
+        {
+          "lhs": "A",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aD"
+        },
+        {
+          "lhs": "B",
+          "rhs": ""
+        },
+        {
+          "lhs": "D",
+          "rhs": "AA"
+        },
+        {
+          "lhs": "C",
+          "rhs": "Ba"
+        }
+      ]
+    },
+    "21": {
+      "variant": 21,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b",
+        "d"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "dB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "d"
+        },
+        {
+          "lhs": "A",
+          "rhs": "dS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aBdB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aA"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "D",
+          "rhs": "ab"
+        },
+        {
+          "lhs": "C",
+          "rhs": "bC"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        }
+      ]
+    },
+    "22": {
+      "variant": 22,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "ACSC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BC"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aA"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "E",
+          "rhs": "bB"
+        }
+      ]
+    },
+    "23": {
+      "variant": 23,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "bAC"
+        },
+        {
+          "lhs": "S",
+          "rhs": "B"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bCaCb"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aAa"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "AB"
+        },
+        {
+          "lhs": "E",
+          "rhs": "BA"
+        }
+      ]
+    },
+    "24": {
+      "variant": 24,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C"
+      ],
+      "terminals": [
+        "a",
+        "d"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "dB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "A"
+        },
+        {
+          "lhs": "A",
+          "rhs": "d"
+        },
+        {
+          "lhs": "A",
+          "rhs": "dS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aBdAB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "dA"
+        },
+        {
+          "lhs": "B",
+          "rhs": "A"
+        },
+        {
+          "lhs": "B",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "Aa"
+        }
+      ]
+    },
+    "25": {
+      "variant": 25,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "BC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bCaCa"
+        },
+        {
+          "lhs": "B",
+          "rhs": "A"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bCAa"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "AB"
+        },
+        {
+          "lhs": "D",
+          "rhs": "AB"
+        }
+      ]
+    },
+    "26": {
+      "variant": 26,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b",
+        "d"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aBA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "AB"
+        },
+        {
+          "lhs": "A",
+          "rhs": "d"
+        },
+        {
+          "lhs": "A",
+          "rhs": "dS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "AbBA"
+        },
+        {
+          "lhs": "A",
+          "rhs": ""
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "A"
+        },
+        {
+          "lhs": "D",
+          "rhs": "Aba"
+        }
+      ]
+    },
+    "27": {
+      "variant": 27,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BC"
+        },
+        {
+          "lhs": "A",
+          "rhs": "AbC"
+        },
+        {
+          "lhs": "B",
+          "rhs": "CbaC"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "bSa"
+        },
+        {
+          "lhs": "C",
+          "rhs": ""
+        },
+        {
+          "lhs": "D",
+          "rhs": "AB"
+        }
+      ]
+    },
+    "28": {
+      "variant": 28,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D",
+        "X"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "B"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aX"
+        },
+        {
+          "lhs": "A",
+          "rhs": "bX"
+        },
+        {
+          "lhs": "X",
+          "rhs": ""
+        },
+        {
+          "lhs": "X",
+          "rhs": "BX"
+        },
+        {
+          "lhs": "X",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AXaD"
+        },
+        {
+          "lhs": "D",
+          "rhs": "aD"
+        },
+        {
+          "lhs": "D",
+          "rhs": "a"
+        },
+        {
+          "lhs": "C",
+          "rhs": "Ca"
+        }
+      ]
+    },
+    "29": {
+      "variant": 29,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "DA"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BD"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aDADB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "ASB"
+        },
+        {
+          "lhs": "D",
+          "rhs": ""
+        },
+        {
+          "lhs": "D",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "C",
+          "rhs": "BA"
+        }
+      ]
+    },
+    "30": {
+      "variant": 30,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "aB"
+        },
+        {
+          "lhs": "S",
+          "rhs": "A"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aBAb"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "BAbB"
+        },
+        {
+          "lhs": "B",
+          "rhs": "BS"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "D",
+          "rhs": "a"
+        }
+      ]
+    },
+    "31": {
+      "variant": 31,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "AC"
+        },
+        {
+          "lhs": "S",
+          "rhs": "bA"
+        },
+        {
+          "lhs": "S",
+          "rhs": "B"
+        },
+        {
+          "lhs": "S",
+          "rhs": "aA"
+        },
+        {
+          "lhs": "A",
+          "rhs": ""
+        },
+        {
+          "lhs": "A",
+          "rhs": "aS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "ABAb"
+        },
+        {
+          "lhs": "B",
+          "rhs": "a"
+        },
+        {
+          "lhs": "B",
+          "rhs": "AbSA"
+        },
+        {
+          "lhs": "C",
+          "rhs": "abC"
+        },
+        {
+          "lhs": "D",
+          "rhs": "AB"
+        }
+      ]
+    },
+    "32": {
+      "variant": 32,
+      "start": "S",
+      "non_terminals": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "productions": [
+        {
+          "lhs": "S",
+          "rhs": "abAB"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aBSBab"
+        },
+        {
+          "lhs": "A",
+          "rhs": "BS"
+        },
+        {
+          "lhs": "A",
+          "rhs": "aA"
+        },
+        {
+          "lhs": "A",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": "BA"
+        },
+        {
+          "lhs": "B",
+          "rhs": "aBaBb"
+        },
+        {
+          "lhs": "B",
+          "rhs": "b"
+        },
+        {
+          "lhs": "B",
+          "rhs": ""
+        },
+        {
+          "lhs": "C",
+          "rhs": "AS"
+        }
+      ]
+    }
+  }
+}
