@@ -15,7 +15,7 @@ from src.catalog import list_variants, load_variant_grammar
 from src.cnf import CNFConverter
 from src.grammar import Grammar
 from src.reporting import build_report_markdown
-from src.visualization import grammar_mermaid, pipeline_mermaid, production_rows, render_mermaid_html
+from src.visualization import grammar_mermaid, pipeline_mermaid, production_rows, render_interactive_mermaid_html, render_mermaid_html
 
 
 DEFAULT_CUSTOM_TEXT = """S -> aB
@@ -189,6 +189,32 @@ def _ensure_step_index(step_count: int) -> int:
     return current
 
 
+def _step_theory(step_title: str, step_description: str, notes: tuple[str, ...]) -> list[str]:
+    title = step_title.lower()
+    lines: list[str] = []
+
+    if "augment start" in title:
+        lines.append("A fresh start symbol makes the later ε-elimination safe because the original start symbol can still be referenced without violating the CNF restriction.")
+    elif "ε-productions" in title:
+        lines.append("Nullable symbols are expanded combinatorially so every string that was possible before still has a surviving derivation after ε rules are removed.")
+    elif "unit productions" in title:
+        lines.append("Unit-production chains are collapsed into direct non-unit productions, removing redundant hops while keeping the same terminal language.")
+    elif "useless symbols" in title or "cleanup" in title:
+        lines.append("Unproductive and unreachable symbols are trimmed because they cannot appear in any valid derivation from the start symbol.")
+    elif "isolate terminals" in title:
+        lines.append("Fresh helper symbols stand in for terminals inside long rules so the grammar matches the CNF shape A -> BC or A -> a.")
+    elif "binarize" in title:
+        lines.append("Long productions are split into binary chains so the final grammar satisfies the structural part of CNF exactly.")
+    else:
+        lines.append(step_description)
+
+    if notes:
+        lines.append("What to notice:")
+        lines.extend(f"- {note}" for note in notes)
+
+    return lines
+
+
 st.markdown(
     """
     <div class="hero">
@@ -251,7 +277,7 @@ with metrics[2]:
 with metrics[3]:
     st.metric("Steps", len(result.steps))
 
-tabs = st.tabs(["Overview", "Steps", "CNF Proof", "Export"])
+tabs = st.tabs(["Overview", "Steps", "Theory", "CNF Proof", "Export"])
 
 with tabs[0]:
     left, right = st.columns([1.15, 0.85], gap="large")
@@ -267,8 +293,16 @@ with tabs[0]:
         st.code(grammar.pretty(), language="text")
     with right:
         st.markdown("### Pipeline Visual")
-        st.caption("The highlighted node follows the manual stepper below.")
-        components.html(render_mermaid_html(pipeline_mermaid(result, active_step=active_step)), height=640, scrolling=True)
+        st.caption("The highlighted node follows the manual stepper below. The canvas supports drag, wheel zoom, and fit-to-screen.")
+        components.html(
+            render_interactive_mermaid_html(
+                pipeline_mermaid(result, active_step=active_step),
+                title=f"{source_label} pipeline",
+                height=760,
+            ),
+            height=820,
+            scrolling=False,
+        )
 
 with tabs[1]:
     st.markdown("### Manual Stepper")
@@ -278,9 +312,20 @@ with tabs[1]:
         nav_left, nav_mid, nav_right = st.columns([0.9, 1.4, 0.9])
         with nav_left:
             if st.button("Previous step", disabled=active_step <= 0, use_container_width=True):
-                st.session_state.cnf_step_index = max(0, active_step - 1)
+                st.session_state.cnf_step_action = "prev"
                 st.rerun()
         with nav_mid:
+            # Process any pending step action BEFORE rendering the slider
+            # This avoids the Streamlit session_state mutation error
+            if "cnf_step_action" in st.session_state:
+                action = st.session_state.cnf_step_action
+                if action == "prev" and active_step > 0:
+                    st.session_state.cnf_step_index = active_step - 1
+                elif action == "next" and active_step < len(result.steps) - 1:
+                    st.session_state.cnf_step_index = active_step + 1
+                del st.session_state.cnf_step_action
+                st.rerun()
+
             st.slider(
                 "Selected rewrite",
                 min_value=0,
@@ -290,7 +335,7 @@ with tabs[1]:
             )
         with nav_right:
             if st.button("Next step", disabled=active_step >= len(result.steps) - 1, use_container_width=True):
-                st.session_state.cnf_step_index = min(len(result.steps) - 1, active_step + 1)
+                st.session_state.cnf_step_action = "next"
                 st.rerun()
 
         step = result.steps[active_step]
@@ -323,6 +368,9 @@ with tabs[1]:
             ]
             st.write("\n".join(explanation_lines))
 
+        st.markdown("#### Theory breakdown")
+        st.write("\n".join(_step_theory(step.title, step.description, step.notes)))
+
         before_col, after_col = st.columns(2, gap="large")
         with before_col:
             st.markdown("**Before**")
@@ -341,6 +389,68 @@ with tabs[1]:
         st.info("No rewrite steps were produced for this grammar.")
 
 with tabs[2]:
+    st.markdown("### Theory Walkthrough")
+    st.caption("This section explains the full CNF conversion in the order the converter applies it.")
+
+    st.markdown("#### CNF rule set")
+    st.write(
+        """
+        CNF allows only three production shapes: A -> BC, A -> a, and S -> ε when the start symbol does not appear on the right-hand side.
+        The converter first cleans the grammar, then isolates terminals, then binarizes long rules so every remaining production fits one of those forms.
+        """
+    )
+
+    st.markdown("#### Why the order matters")
+    st.write(
+        """
+        ε-elimination must happen before binarization because nullable symbols can change the effective length of a rule.
+        Unit productions are removed before useless-symbol cleanup so the reachability graph reflects the real language-producing structure.
+        Terminal isolation and binarization happen after cleanup because helper symbols should be introduced only into the useful core of the grammar.
+        """
+    )
+
+    for index, step in enumerate(result.steps, start=1):
+        with st.expander(f"{index}. {step.title}", expanded=index == 1):
+            st.write(step.description)
+            st.markdown("**Applied theory**")
+            st.write("\n".join(_step_theory(step.title, step.description, step.notes)))
+            st.markdown("**Before / after relationship**")
+            st.write(
+                f"This pass takes {step.before.production_count()} production(s) and returns {step.after.production_count()} production(s), "
+                f"preserving the generated language while reducing the grammar toward CNF."
+            )
+            if step.notes:
+                st.markdown("**Key observations**")
+                for note in step.notes:
+                    st.caption(note)
+
+    st.markdown("#### Variant atlas")
+    st.caption("Pick any official variant to inspect its source grammar and a Mermaid diagram without leaving the app.")
+    atlas_variant = st.selectbox(
+        "Official variant atlas",
+        options=list_variants(),
+        index=list_variants().index(variant_choice) if variant_choice in list_variants() else 0,
+        format_func=lambda value: f"Variant {value}",
+        key="atlas_variant",
+    )
+    atlas_grammar = load_variant_grammar(atlas_variant)
+    atlas_left, atlas_right = st.columns([1, 1], gap="large")
+    with atlas_left:
+        st.markdown("**Source grammar**")
+        st.code(atlas_grammar.pretty(), language="text")
+    with atlas_right:
+        st.markdown("**Mermaid diagram**")
+        components.html(
+            render_interactive_mermaid_html(
+                grammar_mermaid(atlas_grammar, f"Variant {atlas_variant} source grammar"),
+                title=f"Variant {atlas_variant} grammar diagram",
+                height=620,
+            ),
+            height=680,
+            scrolling=False,
+        )
+
+with tabs[3]:
     if result.is_valid():
         st.markdown("### CNF checklist")
         st.success("Every production now matches one of the CNF shapes: A → BC, A → a, or S → ε.")
@@ -350,7 +460,7 @@ with tabs[2]:
         for issue in result.issues:
             st.write(f"- {issue}")
 
-with tabs[3]:
+with tabs[4]:
     report_markdown = build_report_markdown(f"Lab 5 · {source_label}", grammar, result)
     col1, col2, col3, col4 = st.columns(4)
     with col1:
@@ -403,3 +513,4 @@ with tabs[3]:
             mime="application/json",
             width="stretch",
         )
+

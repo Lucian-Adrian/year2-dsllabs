@@ -10,6 +10,9 @@ This lab converts context-free grammars into Chomsky Normal Form with a full tra
 - It exports a Markdown report bundle and Mermaid visuals.
 - It includes a Streamlit dashboard for interactive inspection.
 - The dashboard has a manual stepper that walks through each rewrite pass with explanations and a highlighted pipeline.
+- The dashboard also includes an interactive Mermaid canvas with zoom, pan, fit-to-screen, and responsive resizing.
+- A variant atlas makes every official grammar available as its own Mermaid diagram.
+- The theory walkthrough explains why each CNF pass exists and how it preserves the language.
 
 ## Main Entry Points
 
@@ -32,6 +35,7 @@ python 5_ChomskyNormalForm/main.py --grammar-file 5_ChomskyNormalForm/examples/v
 - `src/reporting.py` writes the report bundle.
 - `app.py` is the interactive Streamlit dashboard.
 - `app.py` includes the manual step navigator and the active pipeline highlight.
+- `app.py` also hosts the interactive diagram canvas and theory walkthrough.
 - `main.py` is the CLI runner for automation and testing.
 
 ## Overachiever Goal

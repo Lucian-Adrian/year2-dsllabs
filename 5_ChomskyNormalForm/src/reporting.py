@@ -8,6 +8,35 @@ from .grammar import Grammar
 from .visualization import grammar_mermaid, pipeline_mermaid
 
 
+def _step_theory(step_title: str, step_description: str, notes: tuple[str, ...]) -> list[str]:
+    title = step_title.lower()
+    lines: list[str] = []
+
+    if "augment start" in title:
+        lines.append("This pass creates a fresh start symbol so later rewrites can freely eliminate ε-productions without breaking the CNF start-symbol rule.")
+    elif "ε-productions" in title:
+        lines.append("This pass expands nullable combinations so the language stays the same even after empty productions are removed.")
+        lines.append("It works by enumerating every way nullable symbols can disappear from a right-hand side and keeping only the meaningful variants.")
+    elif "unit productions" in title:
+        lines.append("This pass removes renaming chains like A -> B -> C by directly copying the non-unit productions reachable through the chain.")
+        lines.append("The language is preserved because unit edges only redirect to productions that already existed in the reachable closure.")
+    elif "useless symbols" in title or "cleanup" in title:
+        lines.append("This pass removes symbols that can never contribute to a terminal string and symbols that are unreachable from the start symbol.")
+        lines.append("That shrinks the grammar before the CNF-specific rewrites, which makes the later passes easier to inspect.")
+    elif "isolate terminals" in title:
+        lines.append("This pass replaces terminals inside long right-hand sides with fresh pre-terminal helpers so the final grammar only uses terminals in length-1 rules.")
+    elif "binarize" in title:
+        lines.append("This pass rewrites long productions into a chain of binary rules, which is the structural requirement of Chomsky Normal Form.")
+    else:
+        lines.append(step_description)
+
+    if notes:
+        lines.append("Key observations from the converter:")
+        lines.extend(f"- {note}" for note in notes)
+
+    return lines
+
+
 def build_report_markdown(title: str, grammar: Grammar, result: CNFConversionResult) -> str:
     lines: list[str] = []
     lines.append(f"# {title}")
@@ -45,6 +74,10 @@ def build_report_markdown(title: str, grammar: Grammar, result: CNFConversionRes
         lines.append(f"### {step.title}")
         lines.append("")
         lines.append(step.description)
+        lines.append("")
+        lines.append("#### Theory")
+        lines.append("")
+        lines.extend(_step_theory(step.title, step.description, step.notes))
         lines.append("")
         if step.notes:
             lines.append("- Notes:")

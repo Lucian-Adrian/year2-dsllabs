@@ -126,3 +126,166 @@ import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.mi
 mermaid.initialize({{ startOnLoad: true, securityLevel: 'loose', theme: 'dark' }});
 </script>
 """
+
+
+def render_interactive_mermaid_html(markup: str, title: str, height: int = 760) -> str:
+        return f"""
+<style>
+    html, body {{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: transparent;
+        font-family: 'IBM Plex Sans', sans-serif;
+    }}
+    .viewer {{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        color: #e5eefc;
+    }}
+    .toolbar {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        border-radius: 14px;
+        background: linear-gradient(180deg, rgba(15, 27, 45, 0.96), rgba(12, 20, 36, 0.98));
+    }}
+    .toolbar .title {{
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.92rem;
+        letter-spacing: 0.03em;
+        color: #dbeafe;
+    }}
+    .toolbar .buttons {{
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }}
+    .toolbar button {{
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        background: rgba(15, 27, 45, 0.96);
+        color: #e5eefc;
+        border-radius: 999px;
+        padding: 0.45rem 0.8rem;
+        cursor: pointer;
+        font-size: 0.82rem;
+    }}
+    .toolbar button:hover {{
+        background: rgba(30, 41, 59, 1);
+    }}
+    .canvas-wrap {{
+        position: relative;
+        width: 100%;
+        height: calc(100% - 58px);
+        min-height: {height}px;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        border-radius: 18px;
+        overflow: hidden;
+        background:
+            radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 25%),
+            linear-gradient(180deg, rgba(8, 15, 28, 0.98), rgba(10, 16, 29, 0.98));
+    }}
+    #diagram {{
+        width: 100%;
+        height: 100%;
+    }}
+    .mermaid {{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+    }}
+    .mermaid svg {{
+        width: 100% !important;
+        height: auto !important;
+        max-width: none !important;
+    }}
+    .hint {{
+        font-size: 0.76rem;
+        color: #94a3b8;
+    }}
+</style>
+<div class="viewer">
+    <div class="toolbar">
+        <div>
+            <div class="title">{title}</div>
+            <div class="hint">Pan by dragging the canvas. Use the buttons or mouse wheel to zoom.</div>
+        </div>
+        <div class="buttons">
+            <button id="zoomIn" type="button">Zoom in</button>
+            <button id="zoomOut" type="button">Zoom out</button>
+            <button id="fit" type="button">Fit</button>
+            <button id="reset" type="button">Reset</button>
+        </div>
+    </div>
+    <div class="canvas-wrap">
+        <div id="diagram" class="mermaid">{markup}</div>
+    </div>
+</div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+mermaid.initialize({{ startOnLoad: true, securityLevel: 'loose', theme: 'dark' }});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+<script>
+window.svgPanZoom = window.svgPanZoom || svgPanZoom;
+</script>
+<script>
+const diagram = document.getElementById('diagram');
+const zoomInButton = document.getElementById('zoomIn');
+const zoomOutButton = document.getElementById('zoomOut');
+const fitButton = document.getElementById('fit');
+const resetButton = document.getElementById('reset');
+
+let panZoom = null;
+
+function attachPanZoom() {{
+    const svg = diagram.querySelector('svg');
+    if (!svg) {{
+        window.requestAnimationFrame(attachPanZoom);
+        return;
+    }}
+
+    if (panZoom) {{
+        panZoom.destroy();
+    }}
+
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+
+    panZoom = window.svgPanZoom(svg, {{
+        zoomEnabled: true,
+        panEnabled: true,
+        controlIconsEnabled: false,
+        fit: true,
+        center: true,
+        minZoom: 0.15,
+        maxZoom: 8,
+        zoomScaleSensitivity: 0.2,
+        dblClickZoomEnabled: true,
+        mouseWheelZoomEnabled: true,
+    }});
+
+    zoomInButton.onclick = () => panZoom.zoomIn();
+    zoomOutButton.onclick = () => panZoom.zoomOut();
+    fitButton.onclick = () => {{ panZoom.fit(); panZoom.center(); }};
+    resetButton.onclick = () => {{ panZoom.resetZoom(); panZoom.center(); }};
+}}
+
+window.addEventListener('load', () => window.requestAnimationFrame(attachPanZoom));
+window.addEventListener('resize', () => {{ if (panZoom) {{ panZoom.resize(); panZoom.fit(); panZoom.center(); }} }});
+</script>
+"""
